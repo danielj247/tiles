@@ -1,5 +1,5 @@
 import { getCanvas, prepareCanvas } from "./utils/canvas";
-import { pixelToIso } from "./utils/iso";
+import { pixelToTile } from "./utils/tile";
 import Tile from "./entities/Tile";
 import store from "./store";
 import "./style.css";
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mouseX = event.clientX - rect.left - canvas.width / 2;
     const mouseY = event.clientY - rect.top - canvas.height / 4;
   
-    store.mouse = pixelToIso(mouseX, mouseY);
+    store.mouse = pixelToTile(mouseX, mouseY);
   });
 
   render();

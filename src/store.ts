@@ -1,7 +1,7 @@
 const store = {
   mouse: {
-    x: 0,
-    y: 0,
+    x: NaN,
+    y: NaN,
   },
 };
 

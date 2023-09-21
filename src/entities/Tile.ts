@@ -1,15 +1,12 @@
+import store from "../store";
 import { getCanvas } from "../utils/canvas";
 import { TILE_SIZE } from "../consts/tile";
-import store from "../store";
+import { HOVER_LINE_WIDTH, LINE_WIDTH } from "../consts/line";
+import { tileToPixel } from "../utils/tile";
 
 function Tile(x: number, y: number) {
-  const { canvas, ctx } = getCanvas();
-
-  const _lineWidth = ctx.lineWidth;
-
-  const screenX = (x - y) * (TILE_SIZE / 2) + canvas.width / 2;
-  const screenY = (x + y) * (TILE_SIZE / 4) + canvas.height / 4;
-
+  const { ctx } = getCanvas();
+  const { x: screenX, y: screenY } = tileToPixel(x, y);
   const isHovered = store.mouse.x === x && store.mouse.y === y;
 
   ctx.beginPath();
@@ -20,7 +17,7 @@ function Tile(x: number, y: number) {
   ctx.closePath();
 
   if (isHovered) {
-    ctx.lineWidth = 3;
+    ctx.lineWidth = HOVER_LINE_WIDTH;
     ctx.strokeStyle = "cyan";
   } else {
     ctx.strokeStyle = "white";
@@ -32,7 +29,7 @@ function Tile(x: number, y: number) {
   ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
   ctx.fill();
 
-  ctx.lineWidth = _lineWidth;
+  ctx.lineWidth = LINE_WIDTH;
 }
 
 export default Tile;

@@ -3,17 +3,17 @@ import { isHovered } from "../utils/interaction";
 import { toPixel } from "../utils/isometric";
 import { getCanvas } from "../utils/canvas";
 import { Vector2 } from "../types/vector";
+import { Entity } from "../types/entity";
 
 const DEFAULT_SIZE: Vector2 = { x: 1, y: 1 };
 
-interface TileProps {
-  position: Vector2;
-  size?: Vector2;
-  sprite: HTMLImageElement;
+interface BlockProps {
+  entity: Entity;
 }
 
-export default function Tile(props: TileProps) {
-  const { position, sprite, size = DEFAULT_SIZE } = props;
+export default function Block(props: BlockProps) {
+  const { entity } = props;
+  const { rotation, position, sprite, size } = entity;
   const { ctx } = getCanvas();
   const hovered = isHovered(position);
 
@@ -26,5 +26,5 @@ export default function Tile(props: TileProps) {
   const x = Math.round(toPixel(position).x - offsetPx.x);
   const y = Math.round(toPixel(position).y - offsetPx.y);
 
-  ctx.drawImage(sprite, x, y, SPRITE_WIDTH * size.x, SPRITE_HEIGHT * size.y);
+  ctx.drawImage(sprite[rotation], x, y, SPRITE_WIDTH * size.x, SPRITE_HEIGHT * size.y);
 }

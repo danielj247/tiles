@@ -17,6 +17,8 @@ const store: Store = {
   },
 
   camera: {
+    zoom: 1,
+    panning: false,
     position: {
       x: 0,
       y: 0,
@@ -25,8 +27,6 @@ const store: Store = {
       x: 0,
       y: 0,
     },
-    zoom: 1,
-    panning: false,
   },
 };
 

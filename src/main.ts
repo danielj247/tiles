@@ -58,27 +58,29 @@ document.addEventListener("DOMContentLoaded", () => {
       x: event.clientX - rect.left - SPRITE_WIDTH / 2,
       y: event.clientY - rect.top - SPRITE_WIDTH / 4,
     };
+
+    const gridVector = toGrid(screenVector);
+    const mouse = {
+      x: Math.round(gridVector.x),
+      y: Math.round(gridVector.y),
+    };
     
-    store.mouse = toGrid(screenVector);
+    store.mouse = mouse;
   });
   
   document.addEventListener("keydown", (event) => {
     switch (event.key) {
-    case "ArrowUp":
     case "w":
-      store.camera.targetPosition.y -= 10;
+      store.camera.targetPosition.y -= 30;
       break;
-    case "ArrowDown":
     case "s":
-      store.camera.targetPosition.y += 10;
+      store.camera.targetPosition.y += 30;
       break;
-    case "ArrowLeft":
     case "a":
-      store.camera.targetPosition.x -= 10;
+      store.camera.targetPosition.x -= 30;
       break;
-    case "ArrowRight":
     case "d":
-      store.camera.targetPosition.x += 10;
+      store.camera.targetPosition.x += 30;
       break;
     }
             

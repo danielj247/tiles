@@ -29,8 +29,8 @@ export function toPixel(grid: Vector2, camera = true) {
   }
   
   return {
-    x: Math.round(grid.x * i_x * 0.5 * SPRITE_WIDTH + grid.y * j_x * 0.5 * SPRITE_WIDTH + offset.x),
-    y: Math.round(grid.x * i_y * 0.5 * SPRITE_HEIGHT + grid.y * j_y * 0.5 * SPRITE_HEIGHT + offset.y),
+    x: grid.x * i_x * 0.5 * SPRITE_WIDTH + grid.y * j_x * 0.5 * SPRITE_WIDTH + offset.x,
+    y: grid.x * i_y * 0.5 * SPRITE_HEIGHT + grid.y * j_y * 0.5 * SPRITE_HEIGHT + offset.y,
   };
 }
 
@@ -49,7 +49,7 @@ export function toGrid(pixel: Vector2, camera = true) {
   }
  
   return {
-    x: Math.round((pixel.x - offset.x) * inv.a + (pixel.y - offset.y) * inv.b),
-    y: Math.round((pixel.x - offset.x) * inv.c + (pixel.y - offset.y) * inv.d),
+    x: (pixel.x - offset.x) * inv.a + (pixel.y - offset.y) * inv.b,
+    y: (pixel.x - offset.x) * inv.c + (pixel.y - offset.y) * inv.d,
   }; 
 }

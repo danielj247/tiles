@@ -1,19 +1,24 @@
+import { isHovered } from "../utils/interaction";
+import { toPixel } from "../utils/isometric";
 import { getCanvas } from "../utils/canvas";
 import { Vector2 } from "../types/vector";
-import blockSprite from "../img/blue-block.png";
-import { toPixel } from "../utils/isometric";
-import store from "../store";
+import blockSprite from "../img/grass-block.png";
 
-const image = new Image();
-image.src = blockSprite;
+const sprite = new Image();
+sprite.src = blockSprite;
 
 export default function Block(position: Vector2) {
   const { ctx } = getCanvas();
+  const hovered = isHovered(position);
+
   let offsetPx = { x: 0, y: 0 };
   
-  if (store.mouse.x === position.x && store.mouse.y === position.y) {
+  if (hovered) {
     offsetPx = { x: 0, y: 5 };
   }
 
-  ctx.drawImage(image, toPixel(position).x, toPixel(position).y - offsetPx.y);
+  const x = Math.round(toPixel(position).x - offsetPx.x);
+  const y = Math.round(toPixel(position).y - offsetPx.y);
+
+  ctx.drawImage(sprite, x, y);
 }

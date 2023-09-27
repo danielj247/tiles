@@ -5,9 +5,9 @@ import store from "../store";
 import { SPRITE_HEIGHT, SPRITE_WIDTH } from "../consts/sprite";
 
 const i_x = 1;
-const i_y = 0.5;
+const i_y = 0.25;
 const j_x = -1;
-const j_y = 0.5;
+const j_y = 0.25;
 
 function invertMatrix(a: number, b: number, c: number, d: number) {
   // Determinant 
@@ -36,13 +36,14 @@ export function toPixel(grid: Vector2, camera = true) {
 
 
 export function toGrid(pixel: Vector2, camera = true) {
+  let offset: Vector2 = { x: 0, y: 0 };
+
   const a = i_x * 0.5 * SPRITE_WIDTH;
   const b = j_x * 0.5 * SPRITE_WIDTH;
   const c = i_y * 0.5 * SPRITE_HEIGHT;
   const d = j_y * 0.5 * SPRITE_HEIGHT;
-  const inv = invertMatrix(a, b, c, d);
-  let offset: Vector2 = { x: 0, y: 0 };
 
+  const inv = invertMatrix(a, b, c, d);
 
   if (camera) {
     offset = store.camera.position;

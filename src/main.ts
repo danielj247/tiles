@@ -1,11 +1,36 @@
 import { lerp } from "./utils/easing";
 import { toGrid } from "./utils/isometric";
 import { getCanvas, prepareCanvas } from "./utils/canvas";
-import { SPRITE_WIDTH } from "./consts/sprite";
+import { SPRITE_HEIGHT, SPRITE_WIDTH } from "./consts/sprite";
 import { Vector2 } from "./types/vector";
-import Block from "./entities/Block";
+import Tile from "./entities/Tile";
 import store from "./store";
 import "./style.css";
+
+import floorPNG from "./img/blocks/proto/floor_E.png";
+import doorPNG from "./img/blocks/proto/doorOpen_W.png";
+import eastWallPNG from "./img/blocks/proto/wall_E.png";
+import northWallPNG from "./img/blocks/proto/wall_N.png";
+import southWallPNG from "./img/blocks/proto/wall_S.png";
+import westWallPNG from "./img/blocks/proto/wall_W.png";
+
+const floorSprite = new Image();
+floorSprite.src = floorPNG;
+
+const doorSprite = new Image();
+doorSprite.src = doorPNG;
+
+const eastWallSprite = new Image();
+eastWallSprite.src = eastWallPNG;
+
+const northWallSprite = new Image();
+northWallSprite.src = northWallPNG;
+
+const southWallSprite = new Image();
+southWallSprite.src = southWallPNG;
+
+const westWallSprite = new Image();
+westWallSprite.src = westWallPNG;
 
 function render() {
   const { ctx, canvas } = getCanvas();
@@ -15,10 +40,71 @@ function render() {
 
   updateCamera();
 
-  for (let x = 0; x < 10; x++) {
-    for (let y = 0; y < 10; y++) {
-      Block({ x, y });
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j ++) {
+      Tile({
+        position: {
+          x: i,
+          y: j,
+        },
+        sprite: floorSprite,
+      });
     }
+  }
+
+  // west wall
+  for (let i = 1; i < 9; i++) {
+    Tile({
+      position: {
+        x: 0,
+        y: i,
+      },
+      sprite: westWallSprite,
+    });
+  }
+
+  // north wall
+  for (let i = 1; i < 9; i++) {
+    Tile({
+      position: {
+        x: i,
+        y: 1,
+      },
+      sprite: southWallSprite,
+    });
+  }
+
+  // south wall
+  for (let i = 1; i < 9; i++) {
+    Tile({
+      position: {
+        x: i,
+        y: 8,
+      },
+      sprite: northWallSprite,
+    });
+  }
+
+  // east wall
+  for (let i = 1; i < 9; i++) {
+    if (i === 5) {
+      Tile({
+        position: {
+          x: 8,
+          y: 5,
+        },
+        sprite: doorSprite,
+      });
+      continue;
+    }
+  
+    Tile({
+      position: {
+        x: 8,
+        y: i,
+      },
+      sprite: westWallSprite,
+    });
   }
 
   window.requestAnimationFrame(render);
@@ -56,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const screenVector = {
       x: event.clientX - rect.left - SPRITE_WIDTH / 2,
-      y: event.clientY - rect.top - SPRITE_WIDTH / 4,
+      y: event.clientY - rect.top - SPRITE_HEIGHT / 1.2,
     };
 
     const gridVector = toGrid(screenVector);

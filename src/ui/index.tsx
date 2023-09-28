@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import App from "@/ui/App";
 
 const ui = document.getElementById("ui");
 

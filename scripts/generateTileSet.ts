@@ -6,7 +6,6 @@ const FILE_NAME = fileURLToPath(import.meta.url);
 const DIR_NAME = path.dirname(FILE_NAME);
 
 const OUTPUT_DIR = path.join(DIR_NAME, "../src/tilesets");
-const OUTPUT_RELATIVE_IMPORT_DIR = "../img/tileset";
 
 const TILE_SET_DIR = path.join(DIR_NAME, "../src/img/tileset");
 const FOLDERS = fs.readdirSync(TILE_SET_DIR);
@@ -45,13 +44,12 @@ for (let i = 0; i < FOLDERS.length; i++) {
       tileSet[name] = { [rotationName]: file };
     }
 
-    fileContent += `import ${name}_${rotation} from "${OUTPUT_RELATIVE_IMPORT_DIR}/${folder}/${file}";\n`;
+    fileContent += `import ${name}_${rotation} from "@/img/tileset/${folder}/${file}";\n`;
     fileContent += `const ${name}_${rotation}_PNG = new Image();\n`;
     fileContent += `${name}_${rotation}_PNG.src = ${name}_${rotation};\n`;
     fileContent += "\n";
   }
 
-  fileContent += "\n";
   fileContent += "export default {\n";
 
   Object.entries(tileSet).forEach(([name, rotations]) => {

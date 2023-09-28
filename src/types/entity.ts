@@ -1,6 +1,6 @@
-import { Rotation } from "./rotation";
-import { Sprite } from "./sprite";
-import { Vector2 } from "./vector";
+import { Rotation } from "@/types/rotation";
+import { Sprite } from "@/types/sprite";
+import { Vector2 } from "@/types/vector";
 
 export enum EntityType {
   FLOOR = "floor",

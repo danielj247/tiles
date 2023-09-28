@@ -1,7 +1,7 @@
-import { getStore } from "../store";
-import { getCanvas } from "./canvas";
-import { toGrid } from "./isometric";
-import { SPRITE_WIDTH, SPRITE_HEIGHT } from "../consts/sprite";
+import { getStore } from "@/store";
+import { getCanvas } from "@/utils/canvas";
+import { toGrid } from "@/utils/isometric";
+import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 
 export function registerControls() {
   const { canvas } = getCanvas();

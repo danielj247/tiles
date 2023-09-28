@@ -1,4 +1,4 @@
-import { Vector2 } from "./vector";
+import { Vector2 } from "@/types/vector";
 
 export interface Camera {
   position: Vector2;

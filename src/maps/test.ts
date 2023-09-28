@@ -1,7 +1,7 @@
-import proto from "../tilesets/proto";
-import { Entity, EntityType } from "../types/entity";
-import { Map } from "../types/map";
-import { Rotation } from "../types/rotation";
+import proto from "@/tilesets/proto";
+import { Entity, EntityType } from "@/types/entity";
+import { Rotation } from "@/types/rotation";
+import { Map } from "@/types/map";
 
 function generateMap(): Map {
   const entities: Entity[] = [];

@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Map } from "./types/map";
-import { Vector2 } from "./types/vector";
-import { Camera } from "./types/camera";
+import { Map } from "@/types/map";
+import { Vector2 } from "@/types/vector";
+import { Camera } from "@/types/camera";
 
 export interface Store {
   map: Map | undefined;

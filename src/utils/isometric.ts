@@ -1,8 +1,8 @@
 // https://gist.github.com/jordwest/8a12196436ebcf8df98a2745251915b5
 
-import { Vector2 } from "../types/vector";
-import { getStore } from "../store";
-import { SPRITE_HEIGHT, SPRITE_WIDTH } from "../consts/sprite";
+import { getStore } from "@/store";
+import { Vector2 } from "@/types/vector";
+import { SPRITE_HEIGHT, SPRITE_WIDTH } from "@/consts/sprite";
 
 const i_x = 1;
 const i_y = 0.25;

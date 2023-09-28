@@ -1,7 +1,7 @@
-import { getStore } from "../store";
-import { Vector2 } from "../types/vector";
-import { getCanvas } from "./canvas";
-import { lerp } from "./easing";
+import { getStore } from "@/store";
+import { Vector2 } from "@/types/vector";
+import { getCanvas } from "@/utils/canvas";
+import { lerp } from "@/utils/easing";
 
 export function updateCamera() {
   const store = getStore();

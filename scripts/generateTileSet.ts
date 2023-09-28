@@ -13,22 +13,22 @@ const FOLDERS = fs.readdirSync(TILE_SET_DIR);
 
 function rotationInitialToName(initial: string) {
   switch (initial) {
-  case "N":
-    return "north";
-  case "E":
-    return "east";
-  case "S":
-    return "south";
-  case "W":
-    return "west";
-  default:
-    throw new Error(`Invalid rotation initial: ${initial}`);
+    case "N":
+      return "north";
+    case "E":
+      return "east";
+    case "S":
+      return "south";
+    case "W":
+      return "west";
+    default:
+      throw new Error(`Invalid rotation initial: ${initial}`);
   }
 }
 
 for (let i = 0; i < FOLDERS.length; i++) {
   let fileContent = "";
-  
+
   const folder = FOLDERS[i];
   const output = path.join(OUTPUT_DIR, `${folder}.ts`);
   const files = fs.readdirSync(path.join(TILE_SET_DIR, folder));
@@ -57,12 +57,12 @@ for (let i = 0; i < FOLDERS.length; i++) {
   Object.entries(tileSet).forEach(([name, rotations]) => {
     fileContent += `  ${name}: {\n`;
     fileContent += `    name: "${name}",\n`;
-    
+
     Object.entries(rotations).forEach(([rotation]) => {
       const rot = rotation.substring(0, 1).toUpperCase();
       fileContent += `    ${rotation}: ${name}_${rot}_PNG,\n`;
     });
-    
+
     fileContent += "  },\n";
   });
 
@@ -75,4 +75,3 @@ for (let i = 0; i < FOLDERS.length; i++) {
   console.log(`Find it at ${output}`);
   console.log("========================================");
 }
-

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // debug map
   store.map = testMap;
-          
+
   // set the canvas size on window resize
   window.addEventListener("resize", prepareCanvas);
 

@@ -1,4 +1,7 @@
-export function getCanvas(): { canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D } {
+export function getCanvas(): {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+} {
   const canvas = document.querySelector<HTMLCanvasElement>("#app");
   const ctx = canvas?.getContext("2d");
 
@@ -8,7 +11,7 @@ export function getCanvas(): { canvas: HTMLCanvasElement, ctx: CanvasRenderingCo
 
   return {
     canvas,
-    ctx,  
+    ctx,
   };
 }
 
@@ -19,9 +22,9 @@ export function prepareCanvas(): void {
 
   canvas.width = innerWidth * dpr;
   canvas.height = innerHeight * dpr;
-  
+
   ctx.scale(dpr, dpr);
-  
+
   canvas.style.width = `${innerWidth}px`;
   canvas.style.height = `${innerHeight}px`;
 }

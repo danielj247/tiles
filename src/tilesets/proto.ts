@@ -958,7 +958,6 @@ import window_W from "../img/tileset/proto/window_W.png";
 const window_W_PNG = new Image();
 window_W_PNG.src = window_W;
 
-
 export default {
   arrowWall: {
     name: "arrowWall",

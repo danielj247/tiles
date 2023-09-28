@@ -10,9 +10,9 @@ const j_x = -1;
 const j_y = 0.25;
 
 function invertMatrix(a: number, b: number, c: number, d: number) {
-  // Determinant 
-  const det = (1 / (a * d - b * c));
-  
+  // Determinant
+  const det = 1 / (a * d - b * c);
+
   return {
     a: det * d,
     b: det * -b,
@@ -27,13 +27,18 @@ export function toPixel(grid: Vector2, camera = true) {
   if (camera) {
     offset = store.camera.position;
   }
-  
+
   return {
-    x: grid.x * i_x * 0.5 * SPRITE_WIDTH + grid.y * j_x * 0.5 * SPRITE_WIDTH + offset.x,
-    y: grid.x * i_y * 0.5 * SPRITE_HEIGHT + grid.y * j_y * 0.5 * SPRITE_HEIGHT + offset.y,
+    x:
+      grid.x * i_x * 0.5 * SPRITE_WIDTH +
+      grid.y * j_x * 0.5 * SPRITE_WIDTH +
+      offset.x,
+    y:
+      grid.x * i_y * 0.5 * SPRITE_HEIGHT +
+      grid.y * j_y * 0.5 * SPRITE_HEIGHT +
+      offset.y,
   };
 }
-
 
 export function toGrid(pixel: Vector2, camera = true) {
   let offset: Vector2 = { x: 0, y: 0 };
@@ -48,9 +53,9 @@ export function toGrid(pixel: Vector2, camera = true) {
   if (camera) {
     offset = store.camera.position;
   }
- 
+
   return {
     x: (pixel.x - offset.x) * inv.a + (pixel.y - offset.y) * inv.b,
     y: (pixel.x - offset.x) * inv.c + (pixel.y - offset.y) * inv.d,
-  }; 
+  };
 }

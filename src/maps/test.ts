@@ -7,7 +7,7 @@ function generateMap(): Map {
   const entities: Entity[] = [];
 
   for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j ++) {
+    for (let j = 0; j < 10; j++) {
       entities.push({
         id: `floor-${i}x${j}`,
         type: EntityType.FLOOR,
@@ -114,7 +114,7 @@ function generateMap(): Map {
       sprite: proto.wall,
     });
   }
-  
+
   return {
     width: 1000,
     height: 1000,

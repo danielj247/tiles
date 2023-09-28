@@ -9,7 +9,7 @@ export interface Store {
     targetPosition: Vector2;
     zoom: number;
     panning: boolean;
-  }
+  };
 }
 
 const store: Store = {

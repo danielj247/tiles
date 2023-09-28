@@ -30,7 +30,7 @@ export function setupCamera() {
 
   const camera: Vector2 = {
     x: Math.round(canvas.width / 2),
-    y: Math.round(canvas.height / 2),
+    y: Math.round(canvas.height / 4),
   };
 
   store.camera.position = camera;

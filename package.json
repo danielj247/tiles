@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "lint": "eslint --ext .ts .",
     "lint:fix": "yarn lint --fix",
-    "tileset:generate": "tsx ./scripts/generateTileSet.ts"
+    "tileset:generate": "tsx ./scripts/generate-tile-set.ts"
   },
   "devDependencies": {
     "@types/node": "^20.7.1",

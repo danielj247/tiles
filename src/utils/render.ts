@@ -2,8 +2,8 @@ import { updateCamera } from "@/utils/camera";
 import { getCanvas } from "@/utils/canvas";
 import { getStore } from "@/store";
 import { Map } from "@/types/map";
-import Block from "@/entities/Block";
-import Tile from "@/entities/Tile";
+import Block from "@/entities/block";
+import Tile from "@/entities/tile";
 import { grid } from "@/tilesets";
 
 export function render() {

@@ -1,7 +1,7 @@
 // https://gist.github.com/jordwest/8a12196436ebcf8df98a2745251915b5
 
 import { Vector2 } from "../types/vector";
-import store from "../store";
+import { getStore } from "../store";
 import { SPRITE_HEIGHT, SPRITE_WIDTH } from "../consts/sprite";
 
 const i_x = 1;
@@ -22,6 +22,7 @@ function invertMatrix(a: number, b: number, c: number, d: number) {
 }
 
 export function toPixel(grid: Vector2, camera = true) {
+  const store = getStore();
   let offset: Vector2 = { x: 0, y: 0 };
 
   if (camera) {
@@ -41,6 +42,7 @@ export function toPixel(grid: Vector2, camera = true) {
 }
 
 export function toGrid(pixel: Vector2, camera = true) {
+  const store = getStore();
   let offset: Vector2 = { x: 0, y: 0 };
 
   const a = i_x * 0.5 * SPRITE_WIDTH;

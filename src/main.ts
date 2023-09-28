@@ -1,4 +1,4 @@
-import store from "./store";
+import { getStore } from "./store";
 import { render } from "./utils/render";
 import { setupCamera } from "./utils/camera";
 import { registerControls } from "./utils/controls";
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   registerControls();
 
   // debug map
-  store.map = testMap;
+  getStore().setMap(testMap);
 
   // set the canvas size on window resize
   window.addEventListener("resize", prepareCanvas);

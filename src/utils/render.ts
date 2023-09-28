@@ -1,10 +1,11 @@
 import { updateCamera } from "./camera";
 import { getCanvas } from "./canvas";
+import { getStore } from "../store";
 import { Map } from "../types/map";
 import Block from "../entities/Block";
-import store from "../store";
 
 export function render() {
+  const store = getStore();
   const { ctx, canvas } = getCanvas();
 
   ctx.fillStyle = "black";

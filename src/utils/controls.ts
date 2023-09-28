@@ -1,10 +1,12 @@
-import store from "../store";
+import { getStore } from "../store";
 import { getCanvas } from "./canvas";
 import { toGrid } from "./isometric";
 import { SPRITE_WIDTH, SPRITE_HEIGHT } from "../consts/sprite";
 
 export function registerControls() {
   const { canvas } = getCanvas();
+  const store = getStore();
+
   canvas.addEventListener("mousemove", (event) => {
     const rect = canvas.getBoundingClientRect();
 
@@ -19,25 +21,37 @@ export function registerControls() {
       y: Math.round(gridVector.y),
     };
 
-    store.mouse = mouse;
+    store.setMouse(mouse);
   });
 
   document.addEventListener("keydown", (event) => {
     switch (event.key) {
       case "w":
-        store.camera.targetPosition.y -= 30;
+        store.setCameraTargetPosition({
+          x: store.camera.position.x,
+          y: store.camera.position.y - 30,
+        });
         break;
       case "s":
-        store.camera.targetPosition.y += 30;
+        store.setCameraTargetPosition({
+          x: store.camera.position.x,
+          y: store.camera.position.y + 30,
+        });
         break;
       case "a":
-        store.camera.targetPosition.x -= 30;
+        store.setCameraTargetPosition({
+          x: store.camera.position.x - 30,
+          y: store.camera.position.y,
+        });
         break;
       case "d":
-        store.camera.targetPosition.x += 30;
+        store.setCameraTargetPosition({
+          x: store.camera.position.x + 30,
+          y: store.camera.position.y,
+        });
         break;
     }
 
-    store.camera.panning = true;
+    store.setCameraPanning(true);
   });
 }

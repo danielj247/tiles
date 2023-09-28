@@ -1,37 +1,98 @@
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 import { Map } from "./types/map";
 import { Vector2 } from "./types/vector";
+import { Camera } from "./types/camera";
 
 export interface Store {
   map: Map | undefined;
+  setMap: (map: Map) => void;
+
   mouse: Vector2;
-  camera: {
-    position: Vector2;
-    targetPosition: Vector2;
-    zoom: number;
-    panning: boolean;
-  };
+  setMouse: (mouse: Vector2) => void;
+
+  camera: Camera;
+  setCamera: (camera: Camera) => void;
+  setCameraPosition: (position: Vector2) => void;
+  setCameraTargetPosition: (targetPosition: Vector2) => void;
+  setCameraZoom: (zoom: number) => void;
+  setCameraPanning: (panning: boolean) => void;
 }
 
-const store: Store = {
-  map: undefined,
+const useStore = create<Store>()(
+  devtools(
+    (set) => ({
+      map: undefined,
 
-  mouse: {
-    x: NaN,
-    y: NaN,
-  },
+      setMap: (map: Map) => set({ map }),
 
-  camera: {
-    zoom: 1,
-    panning: false,
-    position: {
-      x: 0,
-      y: 0,
+      mouse: {
+        x: NaN,
+        y: NaN,
+      },
+
+      setMouse: (mouse: Vector2) => set({ mouse }),
+
+      camera: {
+        zoom: 1,
+        panning: false,
+        position: {
+          x: 0,
+          y: 0,
+        },
+        targetPosition: {
+          x: 0,
+          y: 0,
+        },
+      },
+
+      setCamera: (camera: Partial<Store["camera"]>) =>
+        set((state) => ({
+          camera: {
+            ...state.camera,
+            ...camera,
+          },
+        })),
+
+      setCameraPosition: (position: Vector2) =>
+        set((state) => ({
+          camera: {
+            ...state.camera,
+            position,
+          },
+        })),
+
+      setCameraTargetPosition: (targetPosition: Vector2) =>
+        set((state) => ({
+          camera: {
+            ...state.camera,
+            targetPosition,
+          },
+        })),
+
+      setCameraZoom: (zoom: number) =>
+        set((state) => ({
+          camera: {
+            ...state.camera,
+            zoom,
+          },
+        })),
+
+      setCameraPanning: (panning: boolean) =>
+        set((state) => ({
+          camera: {
+            ...state.camera,
+            panning,
+          },
+        })),
+    }),
+    {
+      name: "store",
     },
-    targetPosition: {
-      x: 0,
-      y: 0,
-    },
-  },
-};
+  ),
+);
 
-export default store;
+const getStore = useStore.getState;
+
+// useStore for UI, getStore for canvas
+export { useStore, getStore };

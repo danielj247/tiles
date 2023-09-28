@@ -2,7 +2,6 @@ import { isHovered } from "@/utils/interaction";
 import { toPixel } from "@/utils/isometric";
 import { getCanvas } from "@/utils/canvas";
 import { Entity } from "@/types/entity";
-import { SPRITE_HEIGHT, SPRITE_WIDTH } from "@/consts/sprite";
 import { Tileset } from "@/types/tileset";
 
 interface BlockProps {

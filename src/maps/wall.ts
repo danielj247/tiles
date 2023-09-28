@@ -1,4 +1,4 @@
-import proto from "@/tilesets/proto";
+import { proto } from "@/tilesets";
 import { Entity } from "@/types/entity";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
@@ -19,7 +19,7 @@ function generateMap(): Map {
           x: i,
           y: j,
         },
-        sprite: proto.floor,
+        sprite: proto.src.floor,
       });
     }
   }
@@ -36,7 +36,7 @@ function generateMap(): Map {
         x: 2,
         y: i,
       },
-      sprite: proto.wall,
+      sprite: proto.src.wall,
     });
 
     for (let j = 0; j < 4; j++) {
@@ -58,7 +58,7 @@ function generateMap(): Map {
           x: 3,
           y: i,
         },
-        sprite: proto.blockHalf,
+        sprite: proto.src.blockHalf,
       });
     }
   }
@@ -74,7 +74,7 @@ function generateMap(): Map {
       x: 4,
       y: 1,
     },
-    sprite: proto.steps,
+    sprite: proto.src.steps,
   });
 
   entities.push({
@@ -88,14 +88,15 @@ function generateMap(): Map {
       x: 4,
       y: 8,
     },
-    sprite: proto.steps,
+    sprite: proto.src.steps,
   });
 
   return {
     name: "wall",
-    width: 1000,
-    height: 1000,
+    width: 20,
+    height: 20,
     entities,
+    tileset: proto,
   };
 }
 

@@ -1,4 +1,4 @@
-import proto from "@/tilesets/proto";
+import { proto } from "@/tilesets";
 import { Entity } from "@/types/entity";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
@@ -19,7 +19,7 @@ function generateMap(): Map {
           x: i,
           y: j,
         },
-        sprite: proto.floor,
+        sprite: proto.src.floor,
       });
     }
   }
@@ -37,7 +37,7 @@ function generateMap(): Map {
         x: 0,
         y: i,
       },
-      sprite: proto.wall,
+      sprite: proto.src.wall,
     });
   }
 
@@ -54,7 +54,7 @@ function generateMap(): Map {
         x: i,
         y: 1,
       },
-      sprite: proto.wall,
+      sprite: proto.src.wall,
     });
   }
 
@@ -71,7 +71,7 @@ function generateMap(): Map {
         x: i,
         y: 8,
       },
-      sprite: proto.wall,
+      sprite: proto.src.wall,
     });
   }
 
@@ -89,7 +89,7 @@ function generateMap(): Map {
           x: 8,
           y: 5,
         },
-        sprite: proto.doorOpen,
+        sprite: proto.src.doorOpen,
       });
       continue;
     }
@@ -105,14 +105,15 @@ function generateMap(): Map {
         x: 8,
         y: i,
       },
-      sprite: proto.wall,
+      sprite: proto.src.wall,
     });
   }
 
   return {
     name: "fort",
-    width: 1000,
-    height: 1000,
+    width: 20,
+    height: 20,
+    tileset: proto,
     entities,
   };
 }

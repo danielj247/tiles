@@ -2,6 +2,7 @@ import { getStore } from "@/store";
 import { getCanvas } from "@/utils/canvas";
 import { toGrid } from "@/utils/isometric";
 import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
+import { grid } from "@/tilesets";
 
 export function registerControls() {
   const { canvas } = getCanvas();
@@ -15,7 +16,7 @@ export function registerControls() {
       y: event.clientY - rect.top - SPRITE_HEIGHT / 1.2,
     };
 
-    const gridVector = toGrid(screenVector);
+    const gridVector = toGrid(screenVector, grid);
     const mouse = {
       x: Math.round(gridVector.x),
       y: Math.round(gridVector.y),

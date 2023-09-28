@@ -1,12 +1,16 @@
-import wall from "@/maps/wall";
 import { useStore } from "@/store";
 import MapDropdown from "@/ui/components/map-dropdown";
+import { Button } from "@/ui/components/ui/button";
+
 export default function App() {
   const selectedMap = useStore((state) => state.map);
 
   return (
     <div className="fixed top-0 left-0 w-screen">
       <header className="flex justify-center pt-2">
+        <div className="absolute top-2 left-2">
+          <Button variant="secondary">New</Button>
+        </div>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-white text-xl">tiles.</h1>
           {selectedMap && (

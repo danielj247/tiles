@@ -3,16 +3,19 @@ import { toPixel } from "@/utils/isometric";
 import { getCanvas } from "@/utils/canvas";
 import { Entity } from "@/types/entity";
 import { SPRITE_HEIGHT, SPRITE_WIDTH } from "@/consts/sprite";
+import { Tileset } from "@/types/tileset";
 
 interface BlockProps {
   entity: Entity;
+  tileset: Tileset;
 }
 
 export default function Block(props: BlockProps) {
-  const { entity } = props;
+  const { entity, tileset } = props;
   const { rotation, position, sprite, size } = entity;
   const { ctx } = getCanvas();
   const hovered = isHovered(position);
+  const pixels = toPixel(position, tileset);
 
   let offsetPx = { x: 0, y: 0 };
 
@@ -20,14 +23,18 @@ export default function Block(props: BlockProps) {
     offsetPx = { x: 0, y: 4 };
   }
 
-  const x = Math.round(toPixel(position).x - offsetPx.x);
-  const y = Math.round(toPixel(position).y - offsetPx.y);
+  const x = Math.round(pixels.x - offsetPx.x);
+  const y = Math.round(pixels.y - offsetPx.y);
+
+  // console.log("==== Block ====");
+  // console.log(x, y);
+  // console.log("===============");
 
   ctx.drawImage(
     sprite[rotation],
     x,
     y,
-    SPRITE_WIDTH * size.x,
-    SPRITE_HEIGHT * size.y,
+    tileset.tile.width * size.x,
+    tileset.tile.height * size.y,
   );
 }

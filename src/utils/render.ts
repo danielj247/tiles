@@ -3,6 +3,8 @@ import { getCanvas } from "@/utils/canvas";
 import { getStore } from "@/store";
 import { Map } from "@/types/map";
 import Block from "@/entities/Block";
+import Tile from "@/entities/Tile";
+import { grid } from "@/tilesets";
 
 export function render() {
   const store = getStore();
@@ -22,6 +24,18 @@ function renderMap(map?: Map) {
     return;
   }
 
+  for (let w = 0; w < map.width; w++) {
+    for (let h = 0; h < map.height; h++) {
+      Tile({
+        position: {
+          x: w,
+          y: h,
+        },
+        tileset: grid,
+      });
+    }
+  }
+
   const renderOrder = map.entities.sort((a, b) => {
     const aDepth = a.position.y + a.size.y;
     const bDepth = b.position.y + b.size.y;
@@ -29,6 +43,6 @@ function renderMap(map?: Map) {
   });
 
   for (const entity of renderOrder) {
-    Block({ entity });
+    Block({ entity, tileset: map.tileset });
   }
 }

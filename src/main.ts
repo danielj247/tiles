@@ -1,7 +1,7 @@
 import store from "./store";
-import { render } from "./render";
-import { setupCamera } from "./camera";
-import { registerControls } from "./controls";
+import { render } from "./utils/render";
+import { setupCamera } from "./utils/camera";
+import { registerControls } from "./utils/controls";
 import { prepareCanvas } from "./utils/canvas";
 import "./style.css";
 

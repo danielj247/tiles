@@ -1,7 +1,7 @@
-import store from "./store";
-import { Vector2 } from "./types/vector";
-import { getCanvas } from "./utils/canvas";
-import { lerp } from "./utils/easing";
+import store from "../store";
+import { Vector2 } from "../types/vector";
+import { getCanvas } from "./canvas";
+import { lerp } from "./easing";
 
 export function updateCamera() {
   if (store.camera.panning) {

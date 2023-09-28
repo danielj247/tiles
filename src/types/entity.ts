@@ -9,7 +9,7 @@ export enum EntityType {
 
 export interface Entity {
   id: string;
-  type: EntityType;
+  // type: EntityType;
   position: Vector2;
   rotation: Rotation;
   size: Vector2;

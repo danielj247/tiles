@@ -1,13 +1,10 @@
-import { getStore } from "@/store";
 import { render } from "@/utils/render";
 import { setupCamera } from "@/utils/camera";
 import { registerControls } from "@/utils/controls";
 import { prepareCanvas } from "@/utils/canvas";
 import "@/style.css";
 
-import testMap from "@/maps/test";
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // set the canvas size
   prepareCanvas();
   // set initial camera positions
@@ -15,8 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // setup event listeners for mouse and keyboard
   registerControls();
 
-  // debug map
-  getStore().setMap(testMap);
+  // dev map - uncomment to use
+  // await (await import("@/store"))
+  //   .getStore()
+  //   .setMap((await import("@/maps/wall")).default);
 
   // set the canvas size on window resize
   window.addEventListener("resize", prepareCanvas);

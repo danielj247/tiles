@@ -116,6 +116,7 @@ function generateMap(): Map {
   }
 
   return {
+    name: "fort",
     width: 1000,
     height: 1000,
     entities,

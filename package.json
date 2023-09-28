@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && tsc-alias && vite build",
+    "build:naughty": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts .",
     "lint:fix": "yarn lint --fix",

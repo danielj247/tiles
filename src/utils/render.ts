@@ -1,8 +1,8 @@
 import { updateCamera } from "./camera";
-import Block from "./entities/Block";
-import store from "./store";
-import { Map } from "./types/map";
-import { getCanvas } from "./utils/canvas";
+import { getCanvas } from "./canvas";
+import { Map } from "../types/map";
+import Block from "../entities/Block";
+import store from "../store";
 
 export function render() {
   const { ctx, canvas } = getCanvas();

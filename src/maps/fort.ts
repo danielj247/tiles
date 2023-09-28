@@ -1,5 +1,5 @@
 import proto from "@/tilesets/proto";
-import { Entity, EntityType } from "@/types/entity";
+import { Entity } from "@/types/entity";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
 
@@ -10,7 +10,6 @@ function generateMap(): Map {
     for (let j = 0; j < 10; j++) {
       entities.push({
         id: `floor-${i}x${j}`,
-        type: EntityType.FLOOR,
         rotation: Rotation.NORTH,
         size: {
           x: 1,
@@ -29,7 +28,6 @@ function generateMap(): Map {
   for (let i = 1; i < 9; i++) {
     entities.push({
       id: `wall-west-${i}`,
-      type: EntityType.WALL,
       rotation: Rotation.WEST,
       size: {
         x: 1,
@@ -47,7 +45,6 @@ function generateMap(): Map {
   for (let i = 1; i < 9; i++) {
     entities.push({
       id: `wall-north-${i}`,
-      type: EntityType.WALL,
       rotation: Rotation.SOUTH,
       size: {
         x: 1,
@@ -65,7 +62,6 @@ function generateMap(): Map {
   for (let i = 1; i < 9; i++) {
     entities.push({
       id: `wall-south-${i}`,
-      type: EntityType.WALL,
       rotation: Rotation.NORTH,
       size: {
         x: 1,
@@ -84,7 +80,6 @@ function generateMap(): Map {
     if (i === 5) {
       entities.push({
         id: `door-east-${i}`,
-        type: EntityType.WALL,
         rotation: Rotation.WEST,
         size: {
           x: 1,
@@ -101,7 +96,6 @@ function generateMap(): Map {
 
     entities.push({
       id: `wall-east-${i}`,
-      type: EntityType.WALL,
       rotation: Rotation.WEST,
       size: {
         x: 1,

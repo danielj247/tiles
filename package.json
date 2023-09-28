@@ -28,7 +28,8 @@
     "tailwindcss": "^3.3.3",
     "tsx": "^3.13.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",

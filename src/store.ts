@@ -46,7 +46,7 @@ const useStore = create<Store>()(
         },
       },
 
-      setCamera: (camera: Partial<Store["camera"]>) =>
+      setCamera: (camera: Camera) =>
         set((state) => ({
           camera: {
             ...state.camera,

@@ -26,10 +26,6 @@ export default function Block(props: BlockProps) {
   const x = Math.round(pixels.x - offsetPx.x);
   const y = Math.round(pixels.y - offsetPx.y);
 
-  // console.log("==== Block ====");
-  // console.log(x, y);
-  // console.log("===============");
-
   ctx.drawImage(
     sprite[rotation],
     x,

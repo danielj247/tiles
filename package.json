@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && tsc-alias && vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts .",
     "lint:fix": "yarn lint --fix",
@@ -26,10 +26,10 @@
     "postcss": "^8.4.30",
     "prettier": "3.0.3",
     "tailwindcss": "^3.3.3",
+    "tsc-alias": "^1.8.8",
     "tsx": "^3.13.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite": "^4.4.5"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",

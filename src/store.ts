@@ -1,6 +1,8 @@
+import { Map } from "./types/map";
 import { Vector2 } from "./types/vector";
 
 export interface Store {
+  map: Map | undefined;
   mouse: Vector2;
   camera: {
     position: Vector2;
@@ -11,6 +13,8 @@ export interface Store {
 }
 
 const store: Store = {
+  map: undefined,
+
   mouse: {
     x: NaN,
     y: NaN,

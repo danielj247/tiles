@@ -6,8 +6,9 @@ import { Vector2 } from "./types/vector";
 import store from "./store";
 import "./style.css";
 
-import TestMap from "./maps/test";
+import testMap from "./maps/test";
 import Block from "./entities/Block";
+import { Map } from "./types/map";
 
 function render() {
   const { ctx, canvas } = getCanvas();
@@ -16,16 +17,7 @@ function render() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   updateCamera();
-
-  const renderOrder = TestMap.entities.sort((a, b) => {
-    const aDepth = a.position.y + a.size.y;
-    const bDepth = b.position.y + b.size.y;
-    return aDepth - bDepth;
-  });
-
-  for (const entity of renderOrder) {
-    Block({ entity });
-  }
+  renderMap(store.map);
 
   window.requestAnimationFrame(render);
 }
@@ -41,10 +33,28 @@ function updateCamera() {
   }
 }
 
+function renderMap(map: Map) {
+  if (!map) {
+    return;
+  }
+
+  const renderOrder = map.entities.sort((a, b) => {
+    const aDepth = a.position.y + a.size.y;
+    const bDepth = b.position.y + b.size.y;
+    return aDepth - bDepth;
+  });
+
+  for (const entity of renderOrder) {
+    Block({ entity });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const { canvas } = getCanvas();
 
   prepareCanvas();
+
+  store.map = testMap;
   
   const camera: Vector2 = {
     x: Math.round(canvas.width / 2),

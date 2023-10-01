@@ -15,11 +15,7 @@ export default defineConfig({
     alias: [
       {
         find: "@",
-        replacement: fileURLToPath(
-          process.env.NODE_ENV === "development"
-            ? new URL("./src", import.meta.url).href
-            : new URL("./", import.meta.url).href,
-        ),
+        replacement: fileURLToPath(new URL("./src", import.meta.url).href),
       },
     ],
   },

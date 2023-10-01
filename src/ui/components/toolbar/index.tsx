@@ -2,29 +2,26 @@ import { useMemo, useState } from "react";
 import { BoxIcon } from "lucide-react";
 import { useStore } from "@/store";
 import { Button } from "@/ui/components/ui/button";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/ui/components/ui/tabs";
 import { Tool } from "@/types/editor";
+import { cn } from "@/utils/general";
 
 export default function Toolbar() {
   const map = useStore((state) => state.map);
+
+  const selectedComponent = useStore(
+    (state) => state.editor.toolbar.selectedComponent,
+  );
+
+  const setSelectedComponent = useStore(
+    (state) => state.editor.toolbar.setSelectedComponent,
+  );
+
   const [selected, setSelected] = useState<Tool>();
 
-  const data = useMemo(() => {
+  const components = useMemo(() => {
     if (!map) return [];
 
-    const { src } = map.tileset;
-    const keys = Object.keys(src);
-
-    return keys.map((key) => {
-      const north = src[key].north.src;
-
-      return { name: key, image: north };
-    });
+    return Object.values(map.tileset.src);
   }, [map]);
 
   function toggleSelectedTool(tab: Tool) {
@@ -49,27 +46,33 @@ export default function Toolbar() {
             <BoxIcon />
           </Button>
           {selected === Tool.Components && (
-            <Tabs
-              defaultValue="all"
-              className="w-[400px] absolute left-16 top-0"
+            <div
+              className={cn(
+                "w-[400px] absolute left-16 top-0 bg-zinc-100 rounded-lg p-2 flex flex-wrap justify-around gap-2 overflow-auto h-[80vh] transition-all duration-300",
+                selectedComponent && "h-14 w-14 p-0 m-0",
+              )}
             >
-              <TabsList>
-                <TabsTrigger value="all" className="px-8">
-                  All
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="all">
-                <div className="w-full bg-zinc-100 rounded-lg p-2 flex flex-wrap justify-around gap-2 overflow-auto h-[80vh]">
-                  {data.map((item) => (
-                    <Button
-                      key={item.name}
-                      className="w-20 h-20 m-1 bg-contain bg-no-repeat bg-center"
-                      style={{ backgroundImage: `url(${item.image})` }}
-                    />
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
+              {!selectedComponent &&
+                components.map((item) => (
+                  <Button
+                    key={item.name}
+                    className="w-20 h-20 m-1 bg-contain bg-no-repeat bg-center"
+                    style={{ backgroundImage: `url(${item.north.src})` }}
+                    onClick={() => setSelectedComponent(item)}
+                  />
+                ))}
+
+              {selectedComponent && (
+                <Button
+                  variant="secondary"
+                  className="w-full h-full bg-contain bg-no-repeat bg-center"
+                  style={{
+                    backgroundImage: `url(${selectedComponent.north.src})`,
+                  }}
+                  onClick={() => setSelectedComponent(undefined)}
+                />
+              )}
+            </div>
           )}
         </li>
       </ul>

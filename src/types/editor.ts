@@ -16,5 +16,6 @@ export interface Editor {
     setSelectedTool: (tool: Tool | undefined) => void;
 
     selectedComponent: Sprite | undefined;
+    setSelectedComponent: (component: Sprite | undefined) => void;
   };
 }

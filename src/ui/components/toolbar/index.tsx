@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { BoxIcon } from "lucide-react";
 import { useStore } from "@/store";
+import { cn } from "@/utils/general";
 import { Button } from "@/ui/components/ui/button";
 import { Tool } from "@/types/editor";
-import { cn } from "@/utils/general";
 
 export default function Toolbar() {
   const map = useStore((state) => state.map);

@@ -1,11 +1,11 @@
-import { updateCamera } from "@/utils/camera";
-import { getCanvas } from "@/utils/canvas";
 import { getStore } from "@/store";
-import { Map } from "@/types/map";
+import { grid } from "@/tilesets";
 import Block from "@/entities/block";
 import Tile from "@/entities/tile";
-import { grid } from "@/tilesets";
-import { Rotation } from "../types/rotation";
+import { updateCamera } from "@/utils/camera";
+import { getCanvas } from "@/utils/canvas";
+import { Rotation } from "@/types/rotation";
+import { Map } from "@/types/map";
 
 export function render() {
   const store = getStore();
@@ -54,6 +54,7 @@ function renderMap(map?: Map) {
 function renderGhost() {
   const store = getStore();
   const selectedComponent = store?.editor?.toolbar.selectedComponent;
+  const selectedRotation = store?.editor?.toolbar.selectedComponentRotation;
   const tileset = store?.map?.tileset;
 
   if (!selectedComponent || !tileset) {
@@ -67,7 +68,7 @@ function renderGhost() {
       id: "ghost",
       position: store.mouse,
       size: { x: 1, y: 1 },
-      rotation: Rotation.NORTH,
+      rotation: selectedRotation || Rotation.NORTH,
       sprite: selectedComponent,
     },
   });

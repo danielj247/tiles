@@ -3,7 +3,8 @@ import { devtools } from "zustand/middleware";
 import { Map } from "@/types/map";
 import { Vector2 } from "@/types/vector";
 import { Camera } from "@/types/camera";
-import { Editor } from "./types/editor";
+import { Editor } from "@/types/editor";
+import { Rotation } from "@/types/rotation";
 
 export interface Store {
   map: Map | undefined;
@@ -117,6 +118,7 @@ const useStore = create<Store>()(
           })),
 
         selectedComponent: undefined,
+        selectedComponentRotation: undefined,
         setSelectedComponent: (
           selectedComponent: Editor["toolbar"]["selectedComponent"],
         ) =>
@@ -125,7 +127,20 @@ const useStore = create<Store>()(
               ...state.editor,
               toolbar: {
                 ...state.editor.toolbar,
+                selectedComponentRotation: Rotation.NORTH,
                 selectedComponent,
+              },
+            },
+          })),
+        setSelectedComponentRotation: (
+          selectedComponentRotation: Editor["toolbar"]["selectedComponentRotation"],
+        ) =>
+          set((state) => ({
+            editor: {
+              ...state.editor,
+              toolbar: {
+                ...state.editor.toolbar,
+                selectedComponentRotation,
               },
             },
           })),

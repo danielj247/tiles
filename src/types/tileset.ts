@@ -1,4 +1,4 @@
-import { Sprite } from "./sprite";
+import { Sprite } from "@/types/sprite";
 
 export interface TilesetSource {
   [key: string]: Sprite;

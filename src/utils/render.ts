@@ -41,9 +41,29 @@ function renderMap(map?: Map) {
   }
 
   const renderOrder = map.entities.sort((a, b) => {
-    const aDepth = a.position.y + a.size.y;
-    const bDepth = b.position.y + b.size.y;
-    return aDepth - bDepth;
+    const aRange = {
+      xMin: a.position.x,
+      xMax: a.position.x + a.size.x,
+      yMin: a.position.y,
+      yMax: a.position.y + a.size.y,
+    };
+
+    const bRange = {
+      xMin: b.position.x,
+      xMax: b.position.x + b.size.x,
+      yMin: b.position.y,
+      yMax: b.position.y + b.size.y,
+    };
+
+    if (aRange.xMin >= bRange.xMax) return 1;
+
+    if (bRange.xMin >= aRange.xMax) return -1;
+
+    if (aRange.yMin >= bRange.yMax) return 1;
+
+    if (bRange.yMin >= aRange.yMax) return -1;
+
+    return 0;
   });
 
   for (const entity of renderOrder) {

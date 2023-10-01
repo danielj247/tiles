@@ -8,14 +8,11 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/ui/components/ui/tabs";
-
-enum Tools {
-  Components = "components",
-}
+import { Tool } from "@/types/editor";
 
 export default function Toolbar() {
   const map = useStore((state) => state.map);
-  const [selected, setSelected] = useState<Tools>();
+  const [selected, setSelected] = useState<Tool>();
 
   const data = useMemo(() => {
     if (!map) return [];
@@ -30,7 +27,7 @@ export default function Toolbar() {
     });
   }, [map]);
 
-  function toggleSelectedTool(tab: Tools) {
+  function toggleSelectedTool(tab: Tool) {
     if (selected === tab) {
       setSelected(undefined);
       return;
@@ -46,12 +43,12 @@ export default function Toolbar() {
           <Button
             className="w-14 h-14"
             title="Components"
-            variant={selected === Tools.Components ? "secondary" : "default"}
-            onClick={() => toggleSelectedTool(Tools.Components)}
+            variant={selected === Tool.Components ? "secondary" : "default"}
+            onClick={() => toggleSelectedTool(Tool.Components)}
           >
             <BoxIcon />
           </Button>
-          {selected === Tools.Components && (
+          {selected === Tool.Components && (
             <Tabs
               defaultValue="all"
               className="w-[400px] absolute left-16 top-0"

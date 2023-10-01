@@ -8,7 +8,7 @@ export function registerControls() {
   const { canvas } = getCanvas();
   const store = getStore();
 
-  canvas.addEventListener("click", (event) => {
+  canvas.addEventListener("click", () => {
     const store = getStore();
     console.log(store.mouse);
   });

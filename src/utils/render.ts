@@ -53,11 +53,16 @@ function renderMap(map?: Map) {
 
 function renderGhost() {
   const store = getStore();
+
+  if (!store.map) {
+    return;
+  }
+
   const selectedComponent = store?.editor?.toolbar.selectedComponent;
   const selectedRotation = store?.editor?.toolbar.selectedComponentRotation;
   const tileset = store?.map?.tileset;
 
-  if (!selectedComponent || !tileset) {
+  if (!selectedComponent || !tileset || !store.mouse.inBounds) {
     return;
   }
 
@@ -66,7 +71,7 @@ function renderGhost() {
     tileset,
     entity: {
       id: "ghost",
-      position: store.mouse,
+      position: store.mouse.position,
       size: { x: 1, y: 1 },
       rotation: selectedRotation || Rotation.NORTH,
       sprite: selectedComponent,

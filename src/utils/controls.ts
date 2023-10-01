@@ -12,13 +12,17 @@ export function registerControls() {
   canvas.addEventListener("click", () => {
     const store = getStore();
 
-    if (!store.editor.toolbar.selectedComponent) {
+    if (
+      !store.map ||
+      !store.editor.toolbar.selectedComponent ||
+      !store.mouse.inBounds
+    ) {
       return;
     }
 
     store.map?.entities.push({
       id: Math.random().toString(36).substr(2, 9),
-      position: store.mouse,
+      position: store.mouse.position,
       rotation:
         store.editor.toolbar.selectedComponentRotation ?? Rotation.NORTH,
       size: {

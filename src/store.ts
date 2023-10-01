@@ -10,7 +10,10 @@ export interface Store {
   map: Map | undefined;
   setMap: (map: Map) => void;
 
-  mouse: Vector2;
+  mouse: {
+    position: Vector2;
+    inBounds: boolean;
+  };
   setMouse: (mouse: Vector2) => void;
 
   camera: Camera;
@@ -24,17 +27,32 @@ export interface Store {
 }
 
 const useStore = create<Store>()(
-  devtools((set) => ({
+  devtools((set, get) => ({
     map: undefined,
 
     setMap: (map: Map) => set({ map }),
 
     mouse: {
-      x: NaN,
-      y: NaN,
+      position: {
+        x: NaN,
+        y: NaN,
+      },
+      inBounds: false,
     },
 
-    setMouse: (mouse: Vector2) => set({ mouse }),
+    setMouse: (position: Vector2) => {
+      const store = get();
+
+      const inBounds: boolean =
+        (store.map &&
+          store.mouse.position.x >= 0 &&
+          store.mouse.position.y >= 0 &&
+          store.mouse.position.x < store.map.width &&
+          store.mouse.position.y < store.map.height) ||
+        false;
+
+      set({ mouse: { position, inBounds } });
+    },
 
     camera: {
       zoom: 1,

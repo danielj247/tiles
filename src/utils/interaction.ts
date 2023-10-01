@@ -6,7 +6,7 @@ export function isHovered(position: Vector2) {
   const x = Math.round(position.x);
   const y = Math.round(position.y);
 
-  if (store.mouse.x === x && store.mouse.y === y) {
+  if (store.mouse.position.x === x && store.mouse.position.y === y) {
     return true;
   }
 

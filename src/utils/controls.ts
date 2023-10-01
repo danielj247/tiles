@@ -8,6 +8,11 @@ export function registerControls() {
   const { canvas } = getCanvas();
   const store = getStore();
 
+  canvas.addEventListener("click", (event) => {
+    const store = getStore();
+    console.log(store.mouse);
+  });
+
   canvas.addEventListener("mousemove", (event) => {
     const rect = canvas.getBoundingClientRect();
 
@@ -26,28 +31,30 @@ export function registerControls() {
   });
 
   document.addEventListener("keydown", (event) => {
+    const store = getStore();
+
     switch (event.key) {
       case "w":
-        store.setCameraTargetPosition({
-          x: store.camera.position.x,
-          y: store.camera.position.y - 30,
-        });
-        break;
-      case "s":
         store.setCameraTargetPosition({
           x: store.camera.position.x,
           y: store.camera.position.y + 30,
         });
         break;
+      case "s":
+        store.setCameraTargetPosition({
+          x: store.camera.position.x,
+          y: store.camera.position.y - 30,
+        });
+        break;
       case "a":
         store.setCameraTargetPosition({
-          x: store.camera.position.x - 30,
+          x: store.camera.position.x + 30,
           y: store.camera.position.y,
         });
         break;
       case "d":
         store.setCameraTargetPosition({
-          x: store.camera.position.x + 30,
+          x: store.camera.position.x - 30,
           y: store.camera.position.y,
         });
         break;

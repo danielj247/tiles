@@ -13,8 +13,8 @@ export default defineConfig({
         find: "@",
         replacement: fileURLToPath(
           process.env.NODE_ENV === "development"
-            ? new URL("./", import.meta.url)
-            : import.meta.url,
+            ? new URL("./src", import.meta.url)
+            : new URL("./", import.meta.url),
         ),
       },
     ],

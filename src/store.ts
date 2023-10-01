@@ -16,12 +16,20 @@ export interface Store {
   };
   setMouse: (mouse: Vector2) => void;
 
+  keyboard: {
+    [key: KeyboardEvent["key"]]: boolean;
+  };
+  setKeyboardInput: (key: KeyboardEvent["key"], value: boolean) => void;
+
   camera: Camera;
   setCamera: (camera: Camera) => void;
   setCameraPosition: (position: Vector2) => void;
   setCameraTargetPosition: (targetPosition: Vector2) => void;
+  setCameraTargetX: (targetX: number) => void;
+  setCameraTargetY: (targetY: number) => void;
   setCameraZoom: (zoom: number) => void;
   setCameraPanning: (panning: boolean) => void;
+  setCameraControls: (controls: Camera["controls"]) => void;
 
   editor: Editor;
 }
@@ -54,6 +62,16 @@ const useStore = create<Store>()(
       set({ mouse: { position, inBounds } });
     },
 
+    keyboard: {},
+
+    setKeyboardInput: (key: KeyboardEvent["key"], value: boolean) =>
+      set((state) => ({
+        keyboard: {
+          ...state.keyboard,
+          [key]: value,
+        },
+      })),
+
     camera: {
       zoom: 1,
       panning: false,
@@ -64,6 +82,12 @@ const useStore = create<Store>()(
       targetPosition: {
         x: 0,
         y: 0,
+      },
+      controls: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
       },
     },
 
@@ -91,6 +115,28 @@ const useStore = create<Store>()(
         },
       })),
 
+    setCameraTargetX: (targetX: number) =>
+      set((state) => ({
+        camera: {
+          ...state.camera,
+          targetPosition: {
+            ...state.camera.targetPosition,
+            x: targetX,
+          },
+        },
+      })),
+
+    setCameraTargetY: (targetY: number) =>
+      set((state) => ({
+        camera: {
+          ...state.camera,
+          targetPosition: {
+            ...state.camera.targetPosition,
+            y: targetY,
+          },
+        },
+      })),
+
     setCameraZoom: (zoom: number) =>
       set((state) => ({
         camera: {
@@ -104,6 +150,14 @@ const useStore = create<Store>()(
         camera: {
           ...state.camera,
           panning,
+        },
+      })),
+
+    setCameraControls: (controls: Camera["controls"]) =>
+      set((state) => ({
+        camera: {
+          ...state.camera,
+          controls,
         },
       })),
 

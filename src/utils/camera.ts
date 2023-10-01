@@ -6,6 +6,26 @@ import { lerp } from "@/utils/easing";
 export function updateCamera() {
   const store = getStore();
 
+  if (store.keyboard.w) {
+    store.setCameraTargetY(store.camera.position.y + 50);
+    store.setCameraPanning(true);
+  }
+
+  if (store.keyboard.s) {
+    store.setCameraTargetY(store.camera.position.y - 50);
+    store.setCameraPanning(true);
+  }
+
+  if (store.keyboard.a) {
+    store.setCameraTargetX(store.camera.position.x + 50);
+    store.setCameraPanning(true);
+  }
+
+  if (store.keyboard.d) {
+    store.setCameraTargetX(store.camera.position.x - 50);
+    store.setCameraPanning(true);
+  }
+
   if (store.camera.panning) {
     store.setCameraPosition({
       x: lerp(store.camera.position.x, store.camera.targetPosition.x, 0.05),

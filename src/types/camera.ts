@@ -5,4 +5,10 @@ export interface Camera {
   targetPosition: Vector2;
   zoom: number;
   panning: boolean;
+  controls: {
+    up: boolean;
+    down: boolean;
+    left: boolean;
+    right: boolean;
+  };
 }

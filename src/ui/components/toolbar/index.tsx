@@ -38,9 +38,12 @@ export default function Toolbar() {
       <ul className="ml-4">
         <li className="relative">
           <Button
-            className="w-14 h-14"
+            className={cn(
+              "w-14 h-14",
+              selected === Tool.Components && "text-white",
+            )}
             title="Components"
-            variant={selected === Tool.Components ? "secondary" : "default"}
+            variant={selected === Tool.Components ? "outline" : "secondary"}
             onClick={() => toggleSelectedTool(Tool.Components)}
           >
             <BoxIcon />

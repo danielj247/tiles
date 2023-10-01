@@ -63,7 +63,6 @@ export default function MenuBar(props: MenubarProps) {
           <MenubarItem>Share</MenubarItem>
           <MenubarSeparator />
           <MenubarItem>Settings</MenubarItem>
-          <MenubarItem>Settings</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>

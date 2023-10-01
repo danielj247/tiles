@@ -57,15 +57,20 @@ export default function App() {
             )}
           </div>
         </header>
-        <Toolbar />
       </div>
+      {selectedMap && (
+        <div className="absolute left-0 top-20">
+          <Toolbar />
+        </div>
+      )}
       {selectedComponent && (
         <Button
           onClick={updateRotation}
-          className="absolute bottom-32 left-1/2 -translate-x-1/2"
+          variant="outline"
+          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 text-white bg-zinc-900/50 group"
         >
           Rotate
-          <Rotate3DIcon className="stroke-white ml-2" />
+          <Rotate3DIcon className="stroke-white ml-2 group-hover:stroke-black transition-colors" />
         </Button>
       )}
     </>

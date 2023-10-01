@@ -53,33 +53,12 @@ export function registerControls() {
   document.addEventListener("keydown", (event) => {
     const store = getStore();
 
-    switch (event.key) {
-      case "w":
-        store.setCameraTargetPosition({
-          x: store.camera.position.x,
-          y: store.camera.position.y + 30,
-        });
-        break;
-      case "s":
-        store.setCameraTargetPosition({
-          x: store.camera.position.x,
-          y: store.camera.position.y - 30,
-        });
-        break;
-      case "a":
-        store.setCameraTargetPosition({
-          x: store.camera.position.x + 30,
-          y: store.camera.position.y,
-        });
-        break;
-      case "d":
-        store.setCameraTargetPosition({
-          x: store.camera.position.x - 30,
-          y: store.camera.position.y,
-        });
-        break;
-    }
+    store.setKeyboardInput(event.key, true);
+  });
 
-    store.setCameraPanning(true);
+  document.addEventListener("keyup", (event) => {
+    const store = getStore();
+
+    store.setKeyboardInput(event.key, false);
   });
 }

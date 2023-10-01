@@ -11,7 +11,11 @@ export default defineConfig({
     alias: [
       {
         find: "@",
-        replacement: fileURLToPath(import.meta.url),
+        replacement: fileURLToPath(
+          process.env.NODE_ENV === "development"
+            ? new URL("./", import.meta.url)
+            : import.meta.url,
+        ),
       },
     ],
   },

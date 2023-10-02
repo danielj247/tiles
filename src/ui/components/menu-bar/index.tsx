@@ -1,4 +1,7 @@
+import { MenubarProps } from "@radix-ui/react-menubar";
 import { useStore } from "@/store";
+import { proto } from "@/tilesets";
+import { Map } from "@/types/map";
 import {
   Menubar,
   MenubarContent,
@@ -11,7 +14,16 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/ui/components/ui/menubar";
-import { MenubarProps } from "@radix-ui/react-menubar";
+
+function createMap(): Map {
+  return {
+    name: "New map",
+    width: 30,
+    height: 30,
+    tileset: proto,
+    entities: [],
+  };
+}
 
 export default function MenuBar(props: MenubarProps) {
   const setMap = useStore((state) => state.setMap);
@@ -21,7 +33,7 @@ export default function MenuBar(props: MenubarProps) {
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
+          <MenubarItem onClick={() => setMap(createMap())}>
             New Map <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />

@@ -14,22 +14,21 @@ export default function Block(props: BlockProps) {
   const { entity, tileset, opacity } = props;
   const { rotation, position, sprite, size } = entity;
   const { ctx } = getCanvas();
-  const hovered = isHovered(position);
+  const hovered = isHovered(entity);
   const pixels = toPixel(position, tileset);
   const gAlpha = ctx.globalAlpha;
-
-  let offsetPx = { x: 0, y: 0 };
-
-  if (hovered) {
-    offsetPx = { x: 0, y: 4 };
-  }
+  const gFilter = ctx.filter;
 
   if (opacity) {
     ctx.globalAlpha = opacity;
   }
 
-  const x = Math.round(pixels.x - offsetPx.x);
-  const y = Math.round(pixels.y - offsetPx.y);
+  if (hovered) {
+    ctx.filter = "brightness(120%)";
+  }
+
+  const x = Math.round(pixels.x);
+  const y = Math.round(pixels.y);
 
   ctx.drawImage(
     sprite[rotation],
@@ -41,5 +40,9 @@ export default function Block(props: BlockProps) {
 
   if (opacity) {
     ctx.globalAlpha = gAlpha;
+  }
+
+  if (ctx.filter !== gFilter) {
+    ctx.filter = gFilter;
   }
 }

@@ -6,7 +6,6 @@ import { updateCamera } from "@/utils/camera";
 import { getCanvas } from "@/utils/canvas";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
-import { Mouse } from "lucide-react";
 import { Tool } from "../types/editor";
 
 export function render() {

@@ -220,6 +220,34 @@ const useStore = create<Store>()((set, get) => ({
             },
           },
         })),
+
+      selectedEntity: undefined,
+      setSelectedEntity: (
+        selectedEntity: Editor["toolbar"]["selectedEntity"],
+      ) =>
+        set((state) => ({
+          editor: {
+            ...state.editor,
+            toolbar: {
+              ...state.editor.toolbar,
+              selectedEntity,
+            },
+          },
+        })),
+
+      hoveredEntities: undefined,
+      setHoveredEntities: (
+        hoveredEntities: Editor["toolbar"]["hoveredEntities"],
+      ) =>
+        set((state) => ({
+          editor: {
+            ...state.editor,
+            toolbar: {
+              ...state.editor.toolbar,
+              hoveredEntities,
+            },
+          },
+        })),
     },
   },
 }));

@@ -1,14 +1,15 @@
 import { getStore } from "@/store";
-import { Vector2 } from "@/types/vector";
+import { Entity } from "@/types/entity";
 
-export function isHovered(position: Vector2) {
+export function isHovered(entity: Entity) {
   const store = getStore();
-  const x = Math.round(position.x);
-  const y = Math.round(position.y);
 
-  if (store.mouse.position.x === x && store.mouse.position.y === y) {
-    return true;
+  if (
+    !store.editor.toolbar.hoveredEntities ||
+    store.editor.toolbar.hoveredEntities.length === 0
+  ) {
+    return false;
   }
 
-  return false;
+  return store.editor.toolbar.hoveredEntities.some((e) => e.id === entity.id);
 }

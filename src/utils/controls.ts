@@ -1,10 +1,10 @@
 import { getStore } from "@/store";
-import { getCanvas } from "@/utils/canvas";
-import { toGrid } from "@/utils/isometric";
-import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 import { grid } from "@/tilesets";
 import { Rotation } from "@/types/rotation";
-import { Tool } from "../types/editor";
+import { getCanvas } from "@/utils/canvas";
+import { toGrid } from "@/utils/isometric";
+import { Tool } from "@/types/editor";
+import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 
 export function registerControls() {
   const { canvas } = getCanvas();
@@ -48,6 +48,7 @@ export function registerControls() {
   });
 
   canvas.addEventListener("mousemove", (event) => {
+    const store = getStore();
     const rect = canvas.getBoundingClientRect();
 
     const screenVector = {
@@ -63,6 +64,15 @@ export function registerControls() {
     };
 
     store.setMouse(mouse);
+
+    const zEnts = store?.map?.entities?.filter((e) => {
+      return (
+        e.position.x === store.mouse.position.x &&
+        e.position.y === store.mouse.position.y
+      );
+    });
+
+    store.editor.toolbar.hoveredEntities = zEnts ?? [];
   });
 
   document.addEventListener("keydown", (event) => {

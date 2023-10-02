@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { MenubarProps } from "@radix-ui/react-menubar";
 import { getStore, useStore } from "@/store";
-import { proto } from "@/tilesets";
+import * as tilesets from "@/tilesets";
+import { Map } from "@/types/map";
+import { saveMap, loadMap } from "@/utils/map";
+import { getTilesets } from "@/utils/tilesets";
+import { Tileset } from "@/types/tileset";
+import { DialogFormData, FormComponent } from "@/types/dialog-form";
 import DialogFormRenderer from "@/ui/components/menu-bar/dialog-form-renderer";
 import {
   Menubar,
@@ -20,10 +25,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/ui/components/ui/dialog";
-import { Map } from "@/types/map";
-import { DialogFormData, FormComponent } from "@/types/dialog-form";
-import * as tilesets from "@/tilesets";
-import { Tileset } from "~/src/types/tileset";
 
 const DIALOG_DATA: DialogFormData = {
   newMap: {
@@ -70,12 +71,10 @@ const DIALOG_DATA: DialogFormData = {
           required: true,
           children: "Tileset",
           placeholder: "Select a tileset",
-          options: Object.values(tilesets)
-            .filter((t) => t.name !== "grid")
-            .map((tileset) => ({
-              value: tileset.name,
-              label: tileset.name[0].toUpperCase() + tileset.name.slice(1),
-            })),
+          options: getTilesets().map((tileset) => ({
+            value: tileset.name,
+            label: tileset.name[0].toUpperCase() + tileset.name.slice(1),
+          })),
         },
       },
     ],
@@ -95,7 +94,7 @@ const DIALOG_DATA: DialogFormData = {
         tileset:
           (Object.values(tilesets) as Array<Tileset>).find(
             (t) => t.name === tileset.value,
-          ) || proto,
+          ) || tilesets.proto,
         entities: [],
       };
 
@@ -106,6 +105,7 @@ const DIALOG_DATA: DialogFormData = {
 };
 
 export default function MenuBar(props: MenubarProps) {
+  const map = useStore((state) => state.map);
   const setMap = useStore((state) => state.setMap);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState("");
@@ -121,8 +121,29 @@ export default function MenuBar(props: MenubarProps) {
               <DialogTrigger>New Map</DialogTrigger>
             </MenubarItem>
             <MenubarSeparator />
-            <MenubarItem disabled>Save Map</MenubarItem>
-            <MenubarItem disabled>Load Map</MenubarItem>
+            <MenubarItem
+              disabled={!map}
+              onClick={() => {
+                if (!map) return;
+
+                saveMap(map);
+              }}
+            >
+              Save Map
+            </MenubarItem>
+            <MenubarItem
+              onClick={async () => {
+                const loadedMap: Map = await loadMap();
+
+                if (!loadedMap) return;
+
+                console.log(loadedMap);
+
+                setMap(loadedMap);
+              }}
+            >
+              Load Map
+            </MenubarItem>
             <MenubarSeparator />
             <MenubarSub>
               <MenubarSubTrigger>Recent maps</MenubarSubTrigger>

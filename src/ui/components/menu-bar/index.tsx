@@ -137,8 +137,6 @@ export default function MenuBar(props: MenubarProps) {
 
                 if (!loadedMap) return;
 
-                console.log(loadedMap);
-
                 setMap(loadedMap);
               }}
             >

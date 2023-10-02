@@ -18,7 +18,13 @@ export default function Tile(props: TileProps) {
     ? "rgba(255, 255, 255, 0.7)"
     : "rgba(255, 255, 255, 0.2)";
 
-  const pixels = toPixel(position, tileset);
+  const pixels = toPixel(
+    {
+      ...position,
+      z: 0,
+    },
+    tileset,
+  );
 
   const northPoint = {
     x: Math.round(pixels.x + tileset.tile.width / 2),

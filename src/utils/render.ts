@@ -6,6 +6,7 @@ import { updateCamera } from "@/utils/camera";
 import { getCanvas } from "@/utils/canvas";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
+import { Mouse } from "lucide-react";
 
 export function render() {
   const store = getStore();
@@ -46,6 +47,8 @@ function renderMap(map?: Map) {
       xMax: a.position.x + a.size.x,
       yMin: a.position.y,
       yMax: a.position.y + a.size.y,
+      zMin: a.position.z,
+      zMax: a.position.z + a.size.z,
     };
 
     const bRange = {
@@ -53,6 +56,8 @@ function renderMap(map?: Map) {
       xMax: b.position.x + b.size.x,
       yMin: b.position.y,
       yMax: b.position.y + b.size.y,
+      zMin: b.position.z,
+      zMax: b.position.z + b.size.z,
     };
 
     if (aRange.xMin >= bRange.xMax) return 1;
@@ -62,6 +67,10 @@ function renderMap(map?: Map) {
     if (aRange.yMin >= bRange.yMax) return 1;
 
     if (bRange.yMin >= aRange.yMax) return -1;
+
+    if (aRange.zMin >= bRange.zMax) return 1;
+
+    if (bRange.zMin >= aRange.zMax) return -1;
 
     return 0;
   });
@@ -86,13 +95,24 @@ function renderGhost() {
     return;
   }
 
+  const z = store.map.entities.filter((e) => {
+    return (
+      e.position.x === store.mouse.position.x &&
+      e.position.y === store.mouse.position.y
+    );
+  }).length;
+
   Block({
     opacity: 0.7,
     tileset,
     entity: {
       id: "ghost",
-      position: store.mouse.position,
-      size: { x: 1, y: 1 },
+      position: {
+        x: store.mouse.position.x,
+        y: store.mouse.position.y,
+        z,
+      },
+      size: { x: 1, y: 1, z: 1 },
       rotation: selectedRotation || Rotation.NORTH,
       sprite: selectedComponent,
     },

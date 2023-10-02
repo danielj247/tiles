@@ -1,6 +1,6 @@
 import { Rotation } from "@/types/rotation";
 import { Sprite } from "@/types/sprite";
-import { Vector2 } from "@/types/vector";
+import { Vector2, Vector3 } from "@/types/vector";
 
 export enum EntityType {
   FLOOR = "floor",
@@ -9,10 +9,9 @@ export enum EntityType {
 
 export interface Entity {
   id: string;
-  // type: EntityType;
-  position: Vector2;
+  position: Vector3;
   rotation: Rotation;
-  size: Vector2;
+  size: Vector3;
   sprite: Sprite;
   attributes?: {
     [key: string]: unknown;

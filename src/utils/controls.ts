@@ -20,14 +20,26 @@ export function registerControls() {
       return;
     }
 
+    const z = store.map.entities.filter((e) => {
+      return (
+        e.position.x === store.mouse.position.x &&
+        e.position.y === store.mouse.position.y
+      );
+    }).length;
+
     store.map?.entities.push({
       id: Math.random().toString(36).substr(2, 9),
-      position: store.mouse.position,
+      position: {
+        x: store.mouse.position.x,
+        y: store.mouse.position.y,
+        z,
+      },
       rotation:
         store.editor.toolbar.selectedComponentRotation ?? Rotation.NORTH,
       size: {
         x: 1,
         y: 1,
+        z: 1,
       },
       sprite: store.editor.toolbar.selectedComponent,
     });
@@ -39,6 +51,7 @@ export function registerControls() {
     const screenVector = {
       x: event.clientX - rect.left - SPRITE_WIDTH / 2,
       y: event.clientY - rect.top - SPRITE_HEIGHT / 1.2,
+      z: 0,
     };
 
     const gridVector = toGrid(screenVector, grid);

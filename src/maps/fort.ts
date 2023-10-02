@@ -14,10 +14,12 @@ function generateMap(): Map {
         size: {
           x: 1,
           y: 1,
+          z: 1,
         },
         position: {
           x: i,
           y: j,
+          z: 0,
         },
         sprite: proto.src.floor,
       });
@@ -32,10 +34,12 @@ function generateMap(): Map {
       size: {
         x: 1,
         y: 1,
+        z: 1,
       },
       position: {
         x: 0,
         y: i,
+        z: 0,
       },
       sprite: proto.src.wall,
     });
@@ -49,10 +53,12 @@ function generateMap(): Map {
       size: {
         x: 1,
         y: 1,
+        z: 1,
       },
       position: {
         x: i,
         y: 1,
+        z: 0,
       },
       sprite: proto.src.wall,
     });
@@ -66,10 +72,12 @@ function generateMap(): Map {
       size: {
         x: 1,
         y: 1,
+        z: 1,
       },
       position: {
         x: i,
         y: 8,
+        z: 0,
       },
       sprite: proto.src.wall,
     });
@@ -84,10 +92,12 @@ function generateMap(): Map {
         size: {
           x: 1,
           y: 1,
+          z: 1,
         },
         position: {
           x: 8,
           y: 5,
+          z: 0,
         },
         sprite: proto.src.doorOpen,
       });
@@ -100,14 +110,64 @@ function generateMap(): Map {
       size: {
         x: 1,
         y: 1,
+        z: 1,
       },
       position: {
         x: 8,
         y: i,
+        z: 0,
       },
       sprite: proto.src.wall,
     });
   }
+
+  entities.push(
+    {
+      id: "block-1",
+      rotation: Rotation.SOUTH,
+      size: {
+        x: 1,
+        y: 1,
+        z: 1,
+      },
+      position: {
+        x: 15,
+        y: 15,
+        z: 0,
+      },
+      sprite: proto.src.block,
+    },
+    {
+      id: "block-2",
+      rotation: Rotation.SOUTH,
+      size: {
+        x: 1,
+        y: 1,
+        z: 1,
+      },
+      position: {
+        x: 15,
+        y: 15,
+        z: 1,
+      },
+      sprite: proto.src.block,
+    },
+    {
+      id: "block-3",
+      rotation: Rotation.SOUTH,
+      size: {
+        x: 1,
+        y: 1,
+        z: 1,
+      },
+      position: {
+        x: 15,
+        y: 15,
+        z: 2,
+      },
+      sprite: proto.src.block,
+    },
+  );
 
   return {
     name: "fort",

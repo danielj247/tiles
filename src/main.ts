@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   registerControls();
 
   // dev map - uncomment to use
-  // await (await import("@/store"))
-  //   .getStore()
-  //   .setMap((await import("@/maps/fort")).default);
+  await (await import("@/store"))
+    .getStore()
+    .setMap((await import("@/maps/fort")).default);
 
   // set the canvas size on window resize
   window.addEventListener("resize", prepareCanvas);

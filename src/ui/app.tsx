@@ -1,4 +1,9 @@
-import { Rotate3DIcon } from "lucide-react";
+import {
+  FilePlusIcon,
+  FileUpIcon,
+  GithubIcon,
+  Rotate3DIcon,
+} from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useStore } from "@/store";
 import Toolbar from "@/ui/components/toolbar";
@@ -6,6 +11,15 @@ import MenuBar from "@/ui/components/menu-bar";
 import { Button } from "@/ui/components/ui/button";
 import { Rotation } from "@/types/rotation";
 import { Tool } from "@/types/editor";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/ui/components/ui/card";
+import HomeScreenCard from "./components/home-screen-card";
 
 export default function App() {
   const selectedMap = useStore((state) => state.map);
@@ -59,11 +73,19 @@ export default function App() {
           </div>
         </header>
       </div>
+
+      {!selectedMap && (
+        <div className="flex justify-center items-center w-full h-[90vh] absolute top-10 left-0">
+          <HomeScreenCard />
+        </div>
+      )}
+
       {selectedMap && (
         <div className="absolute left-0 top-20">
           <Toolbar />
         </div>
       )}
+
       {isComponentsTool && (
         <Button
           onClick={updateRotation}
@@ -74,7 +96,8 @@ export default function App() {
           <Rotate3DIcon className="stroke-white ml-2 group-hover:stroke-black transition-colors" />
         </Button>
       )}
-      {isSelectTool && (
+
+      {isSelectTool && selectedMap && (
         <div className="absolute p-2 bottom-4 right-4 text-white bg-zinc-900/50 text-center flex flex-col gap-y-2">
           <p>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y</p>
           <p>

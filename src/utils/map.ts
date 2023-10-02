@@ -1,6 +1,7 @@
 import { Map } from "@/types/map";
 import { getTilesets } from "./tilesets";
 import { Entity } from "../types/entity";
+import { getStore } from "../store";
 
 export async function saveMap(map: Map) {
   const mapSave = {
@@ -30,7 +31,7 @@ export async function saveMap(map: Map) {
   await writableStream.close();
 }
 
-export async function loadMap() {
+export async function loadMapFile() {
   const [handle] = await window.showOpenFilePicker({
     types: [
       {
@@ -87,4 +88,13 @@ export async function loadMap() {
     tileset,
     entities,
   };
+}
+
+export async function loadMap() {
+  const store = getStore();
+  const loadedMap: Map = await loadMapFile();
+
+  if (!loadedMap) return;
+
+  store.setMap(loadedMap);
 }

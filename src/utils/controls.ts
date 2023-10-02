@@ -8,7 +8,6 @@ import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 
 export function registerControls() {
   const { canvas } = getCanvas();
-  const store = getStore();
 
   canvas.addEventListener("click", () => {
     const store = getStore();
@@ -30,7 +29,9 @@ export function registerControls() {
     }).length;
 
     store.map?.entities.push({
-      id: Math.random().toString(36).substr(2, 9),
+      id: `${store.editor.toolbar.selectedComponent.name}-${Math.random()
+        .toString(36)
+        .substring(2, 9)}`,
       position: {
         x: store.mouse.position.x,
         y: store.mouse.position.y,

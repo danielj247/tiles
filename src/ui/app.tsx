@@ -1,25 +1,26 @@
 import { Rotate3DIcon } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Button } from "@/ui/components/ui/button";
+import { useStore } from "@/store";
 import Toolbar from "@/ui/components/toolbar";
 import MenuBar from "@/ui/components/menu-bar";
+import { Button } from "@/ui/components/ui/button";
 import { Rotation } from "@/types/rotation";
-import { useStore } from "@/store";
+import { Tool } from "@/types/editor";
 
 export default function App() {
   const selectedMap = useStore((state) => state.map);
-
-  const selectedComponent = useStore(
-    (state) => state.editor.toolbar.selectedComponent,
+  const mousePos = useStore((state) => state.mouse.position);
+  const hoveredEnts = useStore((state) => state.editor.toolbar.hoveredEntities);
+  const selectedTool = useStore((state) => state.editor.toolbar.selectedTool);
+  const rotation = useStore(
+    (state) => state.editor.toolbar.selectedComponentRotation,
   );
-
   const setRotation = useStore(
     (state) => state.editor.toolbar.setSelectedComponentRotation,
   );
 
-  const rotation = useStore(
-    (state) => state.editor.toolbar.selectedComponentRotation,
-  );
+  const isSelectTool = selectedTool === Tool.Select;
+  const isComponentsTool = selectedTool === Tool.Components;
 
   function updateRotation() {
     switch (rotation) {
@@ -63,7 +64,7 @@ export default function App() {
           <Toolbar />
         </div>
       )}
-      {selectedComponent && (
+      {isComponentsTool && (
         <Button
           onClick={updateRotation}
           variant="outline"
@@ -72,6 +73,21 @@ export default function App() {
           Rotate
           <Rotate3DIcon className="stroke-white ml-2 group-hover:stroke-black transition-colors" />
         </Button>
+      )}
+      {isSelectTool && (
+        <div className="absolute p-2 bottom-4 right-4 text-white bg-zinc-900/50 text-center flex flex-col gap-y-2">
+          <p>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y</p>
+          <p>
+            {mousePos.x}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{mousePos.y}
+          </p>
+          <hr />
+          <p>
+            {hoveredEnts?.length || 0}{" "}
+            {hoveredEnts?.length === 1 ? "entity" : "entities"}
+          </p>
+          {hoveredEnts && hoveredEnts.length > 0 && <hr />}
+          {hoveredEnts?.map((ent) => <p key={ent.id}>{ent.id}</p>)}
+        </div>
       )}
     </>
   );

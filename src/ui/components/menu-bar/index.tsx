@@ -33,23 +33,17 @@ export default function MenuBar(props: MenubarProps) {
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem onClick={() => setMap(createMap())}>
-            New Map <MenubarShortcut>⌘N</MenubarShortcut>
-          </MenubarItem>
+          <MenubarItem onClick={() => setMap(createMap())}>New Map</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            Save Map <MenubarShortcut>⌘S</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            Load Map <MenubarShortcut>⌘L</MenubarShortcut>
-          </MenubarItem>
+          <MenubarItem disabled>Save Map</MenubarItem>
+          <MenubarItem disabled>Load Map</MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
             <MenubarSubTrigger>Recent maps</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>a map i done</MenubarItem>
-              <MenubarItem>cool map name</MenubarItem>
-              <MenubarItem>man made</MenubarItem>
+              <MenubarItem disabled>a map i done</MenubarItem>
+              <MenubarItem disabled>cool map name</MenubarItem>
+              <MenubarItem disabled>man made</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSub>
@@ -72,18 +66,18 @@ export default function MenuBar(props: MenubarProps) {
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          <MenubarItem>Share</MenubarItem>
+          <MenubarItem disabled>Share</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>Settings</MenubarItem>
+          <MenubarItem disabled>Settings</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Edit</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
+          <MenubarItem disabled>
             Undo change <MenubarShortcut>⌘Z</MenubarShortcut>
           </MenubarItem>
-          <MenubarItem>
+          <MenubarItem disabled>
             Redo change <MenubarShortcut>⌘⇧Z</MenubarShortcut>
           </MenubarItem>
         </MenubarContent>

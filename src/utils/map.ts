@@ -1,5 +1,4 @@
 import { Map } from "@/types/map";
-import * as tilesets from "@/tilesets";
 import { getTilesets } from "./tilesets";
 import { Entity } from "../types/entity";
 

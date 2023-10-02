@@ -7,6 +7,7 @@ import { getCanvas } from "@/utils/canvas";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
 import { Mouse } from "lucide-react";
+import { Tool } from "../types/editor";
 
 export function render() {
   const store = getStore();
@@ -91,7 +92,12 @@ function renderGhost() {
   const selectedRotation = store?.editor?.toolbar.selectedComponentRotation;
   const tileset = store?.map?.tileset;
 
-  if (!selectedComponent || !tileset || !store.mouse.inBounds) {
+  if (
+    !selectedComponent ||
+    !tileset ||
+    !store.mouse.inBounds ||
+    store.editor.toolbar.selectedTool !== Tool.Components
+  ) {
     return;
   }
 

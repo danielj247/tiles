@@ -4,6 +4,7 @@ import { Rotation } from "@/types/rotation";
 
 export enum Tool {
   Components = "components",
+  Select = "select",
 }
 
 export interface Editor {

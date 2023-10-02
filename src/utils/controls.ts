@@ -4,6 +4,7 @@ import { toGrid } from "@/utils/isometric";
 import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 import { grid } from "@/tilesets";
 import { Rotation } from "@/types/rotation";
+import { Tool } from "../types/editor";
 
 export function registerControls() {
   const { canvas } = getCanvas();
@@ -14,6 +15,7 @@ export function registerControls() {
 
     if (
       !store.map ||
+      store.editor.toolbar.selectedTool !== Tool.Components ||
       !store.editor.toolbar.selectedComponent ||
       !store.mouse.inBounds
     ) {

@@ -1,7 +1,7 @@
 # tiles
 Experimenting with isometric tiles, [try the demo](https://tiles.danieljarrett.dev/)
 
-![tiles.]('./src/img/tiles.jpeg')
+![tiles.]('https://raw.githubusercontent.com/danielj247/tiles/main/src/img/tiles.jpeg')
 
 
 ### Development

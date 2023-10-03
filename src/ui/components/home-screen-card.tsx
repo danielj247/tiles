@@ -16,17 +16,31 @@ import {
 import { loadMap } from "@/utils/map";
 import { DIALOG_DATA } from "@/consts/menu-bar";
 
+const GREETINGS = ["Hello there", "Hi", "Hey", "Welcome", "Howdy", "Greetings"];
+const NAME = ["friend", "buddy", "pal", "mate", "dude", "fella"];
+
 export default function HomeScreenCard() {
+  function getGreeting() {
+    const greeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+    const name = NAME[Math.floor(Math.random() * NAME.length)];
+
+    return `${greeting}, ${name}!`;
+  }
+
   return (
     <Card className="w-96">
       <CardHeader>
-        <CardTitle>Hello!</CardTitle>
+        <CardTitle>{getGreeting()}</CardTitle>
         <CardDescription>
-          <p>
+          <p className="mt-2">
             Welcome to <span className="font-semibold">tiles</span>, I hope you
             enjoy using it!
           </p>
-          <ul className="flex flex-col gap-y-2 mt-2">
+          <p className="mt-2">
+            The project is under constant development and is very unstable, so
+            saved maps may not be compatible with future versions.
+          </p>
+          <ul className="flex flex-col gap-y-2 mt-3">
             <li>
               <a
                 href="https://github.com/danielj247/tiles"

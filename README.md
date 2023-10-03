@@ -1,6 +1,8 @@
 # tiles
 Experimenting with isometric tiles, [try the demo](https://tiles.danieljarrett.dev/)
 
+![tiles.]('./src/img/tiles.jpeg')
+
 
 ### Development
 Run `yarn` to install dependencies.

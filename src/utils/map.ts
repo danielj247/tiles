@@ -1,4 +1,4 @@
-import { Map } from "@/types/map";
+import { Map, MapFile } from "@/types/map";
 import { getTilesets } from "./tilesets";
 import { Entity } from "../types/entity";
 import { getStore } from "../store";
@@ -17,9 +17,9 @@ export async function saveMap(map: Map) {
     suggestedName: map.name,
     types: [
       {
-        description: "tiles JSON file",
+        description: "JSON file",
         accept: {
-          "application/json": [".tiles"],
+          "application/json": [".json"],
         },
       },
     ],
@@ -35,9 +35,9 @@ export async function loadMapFile() {
   const [handle] = await window.showOpenFilePicker({
     types: [
       {
-        description: "tiles JSON file",
+        description: "JSON file",
         accept: {
-          "application/json": [".tiles"],
+          "application/json": [".json"],
         },
       },
     ],
@@ -65,16 +65,20 @@ export async function loadMapFile() {
     return;
   }
 
-  const tileset = getTilesets().find((t) => t.name === map.tileset);
+  return parseMapFile(map);
+}
+
+export async function parseMapFile(mapFile: MapFile): Promise<Map | undefined> {
+  const tileset = getTilesets().find((t) => t.name === mapFile.tileset);
 
   if (!tileset) {
     console.error("Tileset not found");
-    console.error(map.tileset);
+    console.error(mapFile.tileset);
     console.error(tileset);
     return;
   }
 
-  const entities = map.entities.map((entity: Entity) => {
+  const entities = mapFile.entities.map((entity: Entity) => {
     const sprite = tileset.src[entity.sprite.name];
 
     return {
@@ -84,7 +88,7 @@ export async function loadMapFile() {
   });
 
   return {
-    ...map,
+    ...mapFile,
     tileset,
     entities,
   };
@@ -92,7 +96,7 @@ export async function loadMapFile() {
 
 export async function loadMap() {
   const store = getStore();
-  const loadedMap: Map = await loadMapFile();
+  const loadedMap = await loadMapFile();
 
   if (!loadedMap) return;
 

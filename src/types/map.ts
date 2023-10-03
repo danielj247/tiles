@@ -8,3 +8,11 @@ export interface Map {
   tileset: Tileset;
   entities: Entity[];
 }
+
+export interface MapFile {
+  name: string;
+  width: number;
+  height: number;
+  tileset: string;
+  entities: Entity[];
+}

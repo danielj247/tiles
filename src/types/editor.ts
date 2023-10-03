@@ -6,6 +6,7 @@ import { Entity } from "@/types/entity";
 export enum Tool {
   Components = "components",
   Select = "select",
+  Delete = "delete",
 }
 
 export interface Editor {

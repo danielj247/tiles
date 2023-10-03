@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { MenubarProps } from "@radix-ui/react-menubar";
-import { getStore, useStore } from "@/store";
-import * as tilesets from "@/tilesets";
-import { Map } from "@/types/map";
-import { saveMap, loadMap } from "@/utils/map";
-import { getTilesets } from "@/utils/tilesets";
-import { Tileset } from "@/types/tileset";
-import { DialogFormData, FormComponent } from "@/types/dialog-form";
+import { useStore } from "@/store";
+import { MapFile } from "@/types/map";
+import { saveMap, loadMap, parseMapFile } from "@/utils/map";
 import DialogFormRenderer from "@/ui/components/menu-bar/dialog-form-renderer";
 import {
   Menubar,
@@ -33,6 +29,16 @@ export default function MenuBar(props: MenubarProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState("");
   const dialog = dialogKey ? DIALOG_DATA[dialogKey] : undefined;
+
+  async function loadLocalMap(mapFile: MapFile) {
+    if (!mapFile) return;
+
+    const parsedMap = await parseMapFile(mapFile as unknown as MapFile);
+
+    if (!parsedMap) return;
+
+    setMap(parsedMap);
+  }
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -68,18 +74,20 @@ export default function MenuBar(props: MenubarProps) {
               <MenubarSubTrigger>Example maps</MenubarSubTrigger>
               <MenubarSubContent>
                 <MenubarItem
-                  onClick={async () =>
-                    setMap((await import("@/maps/fort")).default)
-                  }
+                  onClick={async () => {
+                    const mapFile = await import("@/maps/tiles.json");
+                    loadLocalMap(mapFile as unknown as MapFile);
+                  }}
                 >
-                  Fort
+                  tiles.
                 </MenubarItem>
                 <MenubarItem
-                  onClick={async () =>
-                    setMap((await import("@/maps/wall")).default)
-                  }
+                  onClick={async () => {
+                    const mapFile = await import("@/maps/fort.json");
+                    loadLocalMap(mapFile as unknown as MapFile);
+                  }}
                 >
-                  Wall
+                  fort
                 </MenubarItem>
               </MenubarSubContent>
             </MenubarSub>

@@ -4,6 +4,7 @@ import { Rotation } from "@/types/rotation";
 import { getCanvas } from "@/utils/canvas";
 import { toGrid } from "@/utils/isometric";
 import { Tool } from "@/types/editor";
+import { Map } from "@/types/map";
 import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 
 export function registerControls() {
@@ -11,6 +12,23 @@ export function registerControls() {
 
   canvas.addEventListener("click", () => {
     const store = getStore();
+
+    if (store.editor.toolbar.selectedTool === Tool.Delete) {
+      const map = {
+        ...store.map,
+        entities:
+          store.map?.entities.filter((e) => {
+            return (
+              e.position.x !== store.mouse.position.x ||
+              e.position.y !== store.mouse.position.y
+            );
+          }) || [],
+      };
+
+      store.setMap(map as Map);
+
+      return;
+    }
 
     if (
       !store.map ||

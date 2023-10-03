@@ -2,6 +2,7 @@ import { useStore } from "@/store";
 import ComponentsTool from "@/ui/components/toolbar/components-tool";
 import SelectTool from "@/ui/components/toolbar/select-tool";
 import { Tool } from "@/types/editor";
+import DeleteTool from "./delete-tool";
 
 export default function Toolbar() {
   const selectedTool = useStore((state) => state.editor.toolbar.selectedTool);
@@ -30,6 +31,12 @@ export default function Toolbar() {
         <li className="relative">
           <ComponentsTool
             selected={selectedTool === Tool.Components}
+            toggleSelectedTool={toggleSelectedTool}
+          />
+        </li>
+        <li className="relative">
+          <DeleteTool
+            selected={selectedTool === Tool.Delete}
             toggleSelectedTool={toggleSelectedTool}
           />
         </li>

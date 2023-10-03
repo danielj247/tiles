@@ -17,3 +17,14 @@ export interface Entity {
     [key: string]: unknown;
   };
 }
+
+export interface CleanEntity {
+  id: string;
+  position: Vector3;
+  rotation: Rotation;
+  size: Vector3;
+  sprite: string;
+  attributes?: {
+    [key: string]: unknown;
+  };
+}

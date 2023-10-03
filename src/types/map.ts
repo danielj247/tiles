@@ -1,4 +1,4 @@
-import { Entity } from "@/types/entity";
+import { CleanEntity, Entity } from "@/types/entity";
 import { Tileset } from "@/types/tileset";
 
 export interface Map {
@@ -9,10 +9,14 @@ export interface Map {
   entities: Entity[];
 }
 
-export interface MapFile {
+export interface CleanMap {
   name: string;
   width: number;
   height: number;
   tileset: string;
-  entities: Entity[];
+  entities: CleanEntity[];
+}
+
+export interface MapFile extends CleanMap {
+  default?: Map;
 }

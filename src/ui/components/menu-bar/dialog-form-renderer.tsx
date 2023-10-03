@@ -1,6 +1,3 @@
-import { Button } from "@/ui/components/ui/button";
-import { Input } from "@/ui/components/ui/input";
-import { Label } from "@/ui/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -14,7 +11,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/ui/components/ui/dialog";
+import { Button } from "@/ui/components/ui/button";
+import { Input } from "@/ui/components/ui/input";
+import { Label } from "@/ui/components/ui/label";
 import { DialogFormDataItem, FormComponent } from "@/types/dialog-form";
+import { SelectProps } from "@/types/select";
 
 interface DialogFormRendererProps {
   dialog?: DialogFormDataItem;
@@ -57,14 +58,12 @@ export default function DialogFormRenderer(props: DialogFormRendererProps) {
 
               if (type === FormComponent.Select) {
                 const { children, placeholder, options, ...selectProps } =
-                  props;
+                  props as SelectProps;
                 return (
                   <div className="grid grid-cols-4 items-center gap-4" key={ix}>
                     <Label htmlFor={selectProps.name} className="text-right">
                       {children}
                     </Label>
-                    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                    {/* @ts-ignore */}
                     <Select {...selectProps}>
                       <SelectTrigger className="col-span-3">
                         <SelectValue placeholder={placeholder} />

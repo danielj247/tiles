@@ -20,20 +20,21 @@ import {
   DialogTrigger,
 } from "@/ui/components/ui/dialog";
 import { saveMap, loadMap, parseMapFile } from "@/utils/map";
-import { MapFile } from "@/types/map";
+import { CleanMap } from "@/types/map";
 import { DIALOG_DATA } from "@/consts/menu-bar";
 
 export default function MenuBar(props: MenubarProps) {
   const map = useMapStore((state) => state.map);
+  const cleanMap = useMapStore((state) => state.cleanMap);
   const setMap = useMapStore((state) => state.setMap);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState("");
   const dialog = dialogKey ? DIALOG_DATA[dialogKey] : undefined;
 
-  async function loadLocalMap(mapFile: MapFile) {
+  async function loadLocalMap(mapFile: CleanMap) {
     if (!mapFile) return;
 
-    const parsedMap = await parseMapFile(mapFile as unknown as MapFile);
+    const parsedMap = await parseMapFile(mapFile);
 
     if (!parsedMap) return;
 
@@ -53,9 +54,9 @@ export default function MenuBar(props: MenubarProps) {
             <MenubarItem
               disabled={!map}
               onClick={() => {
-                if (!map) return;
+                if (!cleanMap) return;
 
-                saveMap(map);
+                saveMap(cleanMap);
               }}
             >
               Save Map
@@ -76,7 +77,7 @@ export default function MenuBar(props: MenubarProps) {
                 <MenubarItem
                   onClick={async () => {
                     const mapFile = await import("@/maps/tiles.json");
-                    loadLocalMap(mapFile as unknown as MapFile);
+                    loadLocalMap(mapFile as unknown as CleanMap);
                   }}
                 >
                   tiles.
@@ -84,7 +85,7 @@ export default function MenuBar(props: MenubarProps) {
                 <MenubarItem
                   onClick={async () => {
                     const mapFile = await import("@/maps/fort.json");
-                    loadLocalMap(mapFile as unknown as MapFile);
+                    loadLocalMap(mapFile as unknown as CleanMap);
                   }}
                 >
                   fort

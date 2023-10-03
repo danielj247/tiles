@@ -1,18 +1,10 @@
 import { getMapStore } from "@/stores/map";
 import { getTilesets } from "@/utils/tilesets";
-import { Map, MapFile } from "@/types/map";
-import { Entity } from "@/types/entity";
+import { Map, CleanMap } from "@/types/map";
 
-export async function saveMap(map: Map) {
-  const mapSave = {
-    name: map.name,
-    width: map.width,
-    height: map.height,
-    tileset: map.tileset.name,
-    entities: map.entities,
-  };
+export async function saveMap(map: CleanMap) {
+  const blob = new Blob([JSON.stringify(map)], { type: "text/plain" });
 
-  const blob = new Blob([JSON.stringify(mapSave)], { type: "text/plain" });
   const newHandle = await window.showSaveFilePicker({
     suggestedName: map.name,
     types: [
@@ -68,7 +60,7 @@ export async function loadMapFile() {
   return parseMapFile(map);
 }
 
-export async function parseMapFile(mapFile: MapFile): Promise<Map | undefined> {
+export function parseMapFile(mapFile: CleanMap): Map | undefined {
   const tileset = getTilesets().find((t) => t.name === mapFile.tileset);
 
   if (!tileset) {
@@ -78,8 +70,8 @@ export async function parseMapFile(mapFile: MapFile): Promise<Map | undefined> {
     return;
   }
 
-  const entities = mapFile.entities.map((entity: Entity) => {
-    const sprite = tileset.src[entity.sprite.name];
+  const entities = mapFile.entities.map((entity) => {
+    const sprite = tileset.src[entity.sprite];
 
     return {
       ...entity,
@@ -88,7 +80,9 @@ export async function parseMapFile(mapFile: MapFile): Promise<Map | undefined> {
   });
 
   return {
-    ...mapFile,
+    name: mapFile.name,
+    width: mapFile.width,
+    height: mapFile.height,
     tileset,
     entities,
   };

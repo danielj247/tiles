@@ -1,7 +1,7 @@
+import { getStore } from "@/store";
+import { getTilesets } from "@/utils/tilesets";
 import { Map, MapFile } from "@/types/map";
-import { getTilesets } from "./tilesets";
-import { Entity } from "../types/entity";
-import { getStore } from "../store";
+import { Entity } from "@/types/entity";
 
 export async function saveMap(map: Map) {
   const mapSave = {

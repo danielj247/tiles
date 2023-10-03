@@ -1,25 +1,12 @@
-import {
-  FilePlusIcon,
-  FileUpIcon,
-  GithubIcon,
-  Rotate3DIcon,
-} from "lucide-react";
+import { Rotate3DIcon } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useStore } from "@/store";
 import Toolbar from "@/ui/components/toolbar";
 import MenuBar from "@/ui/components/menu-bar";
 import { Button } from "@/ui/components/ui/button";
+import HomeScreenCard from "@/ui/components/home-screen-card";
 import { Rotation } from "@/types/rotation";
 import { Tool } from "@/types/editor";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/ui/components/ui/card";
-import HomeScreenCard from "./components/home-screen-card";
 
 export default function App() {
   const selectedMap = useStore((state) => state.map);

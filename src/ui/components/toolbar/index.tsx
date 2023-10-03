@@ -1,8 +1,8 @@
 import { useStore } from "@/store";
-import ComponentsTool from "@/ui/components/toolbar/components-tool";
 import SelectTool from "@/ui/components/toolbar/select-tool";
+import ComponentsTool from "@/ui/components/toolbar/components-tool";
+import DeleteTool from "@/ui/components/toolbar/delete-tool";
 import { Tool } from "@/types/editor";
-import DeleteTool from "./delete-tool";
 
 export default function Toolbar() {
   const selectedTool = useStore((state) => state.editor.toolbar.selectedTool);

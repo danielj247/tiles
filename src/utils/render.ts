@@ -6,7 +6,7 @@ import { updateCamera } from "@/utils/camera";
 import { getCanvas } from "@/utils/canvas";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
-import { Tool } from "../types/editor";
+import { Tool } from "@/types/editor";
 
 export function render() {
   const store = getStore();

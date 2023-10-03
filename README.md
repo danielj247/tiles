@@ -1,7 +1,7 @@
 # tiles
 Experimenting with isometric tiles, [try the demo](https://tiles.danieljarrett.dev/)
 
-![tiles.]('https://github.com/danielj247/tiles/blob/main/src/img/tiles.jpeg')
+![tiles.]('https://github.com/danielj247/tiles/blob/main/src/img/tiles.jpeg?raw=true')
 
 ### Development
 Run `yarn` to install dependencies.

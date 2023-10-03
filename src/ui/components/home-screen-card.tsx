@@ -16,8 +16,8 @@ import {
 import { loadMap } from "@/utils/map";
 import { DIALOG_DATA } from "@/consts/menu-bar";
 
-const GREETINGS = ["Hello there", "Hi", "Hey", "Welcome", "Howdy", "Greetings"];
-const NAME = ["friend", "buddy", "pal", "mate", "dude", "fella"];
+const GREETINGS = ["Hello", "Hi", "Welcome", "Howdy", "Greetings"];
+const NAME = ["friend", "buddy", "pal", "dude"];
 
 export default function HomeScreenCard() {
   function getGreeting() {

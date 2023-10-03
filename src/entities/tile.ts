@@ -1,4 +1,4 @@
-import { getStore } from "@/store";
+import { getControlsStore } from "@/stores/controls";
 import { toPixel } from "@/utils/isometric";
 import { getCanvas } from "@/utils/canvas";
 import { Vector2 } from "@/types/vector";
@@ -11,12 +11,12 @@ interface TileProps {
 
 export default function Tile(props: TileProps) {
   const { position, tileset } = props;
-  const store = getStore();
+  const controlsStore = getControlsStore();
   const { ctx } = getCanvas();
 
   const hovered =
-    store.mouse.position.x === position.x &&
-    store.mouse.position.y === position.y;
+    controlsStore.mouse.position.x === position.x &&
+    controlsStore.mouse.position.y === position.y;
 
   ctx.strokeStyle = hovered
     ? "rgba(255, 255, 255, 0.7)"

@@ -1,4 +1,4 @@
-import { getStore } from "@/store";
+import { getMapStore } from "@/stores/map";
 import { getTilesets } from "@/utils/tilesets";
 import { Map, MapFile } from "@/types/map";
 import { Entity } from "@/types/entity";
@@ -95,10 +95,10 @@ export async function parseMapFile(mapFile: MapFile): Promise<Map | undefined> {
 }
 
 export async function loadMap() {
-  const store = getStore();
+  const mapStore = getMapStore();
   const loadedMap = await loadMapFile();
 
   if (!loadedMap) return;
 
-  store.setMap(loadedMap);
+  mapStore.setMap(loadedMap);
 }

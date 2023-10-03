@@ -1,15 +1,17 @@
-import { getStore } from "@/store";
 import { grid } from "@/tilesets";
+import { getMapStore } from "@/stores/map";
+import { getEditorStore } from "@/stores/editor";
+import { getControlsStore } from "@/stores/controls";
 import Block from "@/entities/block";
 import Tile from "@/entities/tile";
 import { updateCamera } from "@/utils/camera";
 import { getCanvas } from "@/utils/canvas";
 import { Rotation } from "@/types/rotation";
 import { Map } from "@/types/map";
-import { Tool } from "@/types/editor";
+import { Tool } from "@/types/tool";
 
 export function render() {
-  const store = getStore();
+  const mapStore = getMapStore();
   const { ctx, canvas } = getCanvas();
 
   ctx.fillStyle = "black";
@@ -17,7 +19,7 @@ export function render() {
 
   updateCamera();
 
-  renderMap(store.map);
+  renderMap(mapStore.map);
 
   renderGhost();
 
@@ -81,29 +83,32 @@ function renderMap(map?: Map) {
 }
 
 function renderGhost() {
-  const store = getStore();
+  const mapStore = getMapStore();
+  const editorStore = getEditorStore();
+  const controlsStore = getControlsStore();
 
-  if (!store.map) {
+  if (!mapStore.map) {
     return;
   }
 
-  const selectedComponent = store?.editor?.toolbar.selectedComponent;
-  const selectedRotation = store?.editor?.toolbar.selectedComponentRotation;
-  const tileset = store?.map?.tileset;
+  const selectedComponent = editorStore?.toolbar.components.selectedComponent;
+  const selectedRotation =
+    editorStore?.toolbar.components.selectedComponentRotation;
+  const tileset = mapStore.map?.tileset;
 
   if (
     !selectedComponent ||
     !tileset ||
-    !store.mouse.inBounds ||
-    store.editor.toolbar.selectedTool !== Tool.Components
+    !controlsStore.mouse.inBounds ||
+    editorStore.toolbar.selectedTool !== Tool.Components
   ) {
     return;
   }
 
-  const z = store.map.entities.filter((e) => {
+  const z = mapStore.map.entities.filter((e) => {
     return (
-      e.position.x === store.mouse.position.x &&
-      e.position.y === store.mouse.position.y
+      e.position.x === controlsStore.mouse.position.x &&
+      e.position.y === controlsStore.mouse.position.y
     );
   }).length;
 
@@ -113,8 +118,8 @@ function renderGhost() {
     entity: {
       id: "ghost",
       position: {
-        x: store.mouse.position.x,
-        y: store.mouse.position.y,
+        x: controlsStore.mouse.position.x,
+        y: controlsStore.mouse.position.y,
         z,
       },
       size: { x: 1, y: 1, z: 1 },

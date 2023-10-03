@@ -1,7 +1,7 @@
 import { MousePointer } from "lucide-react";
-import { Tool } from "@/types/editor";
-import { cn } from "@/utils/general";
 import { Button } from "@/ui/components/ui/button";
+import { cn } from "@/utils/general";
+import { Tool } from "@/types/tool";
 
 interface SelectToolProps {
   selected: boolean;

@@ -1,73 +1,80 @@
-import { getStore } from "@/store";
 import { grid } from "@/tilesets";
-import { Rotation } from "@/types/rotation";
+import { getMapStore } from "@/stores/map";
+import { getEditorStore } from "@/stores/editor";
+import { getControlsStore } from "@/stores/controls";
 import { getCanvas } from "@/utils/canvas";
 import { toGrid } from "@/utils/isometric";
-import { Tool } from "@/types/editor";
 import { Map } from "@/types/map";
+import { Tool } from "@/types/tool";
+import { Rotation } from "@/types/rotation";
 import { SPRITE_WIDTH, SPRITE_HEIGHT } from "@/consts/sprite";
 
 export function registerControls() {
   const { canvas } = getCanvas();
 
   canvas.addEventListener("click", () => {
-    const store = getStore();
+    const editorStore = getEditorStore();
+    const mapStore = getMapStore();
+    const controlsStore = getControlsStore();
 
-    if (store.editor.toolbar.selectedTool === Tool.Delete) {
+    if (editorStore.toolbar.selectedTool === Tool.Delete) {
       const map = {
-        ...store.map,
+        ...mapStore.map,
         entities:
-          store.map?.entities.filter((e) => {
+          mapStore.map?.entities.filter((e) => {
             return (
-              e.position.x !== store.mouse.position.x ||
-              e.position.y !== store.mouse.position.y
+              e.position.x !== controlsStore.mouse.position.x ||
+              e.position.y !== controlsStore.mouse.position.y
             );
           }) || [],
       };
 
-      store.setMap(map as Map);
+      mapStore.setMap(map as Map);
 
       return;
     }
 
     if (
-      !store.map ||
-      store.editor.toolbar.selectedTool !== Tool.Components ||
-      !store.editor.toolbar.selectedComponent ||
-      !store.mouse.inBounds
+      !mapStore.map ||
+      editorStore.toolbar.selectedTool !== Tool.Components ||
+      !editorStore.toolbar.components.selectedComponent ||
+      !controlsStore.mouse.inBounds
     ) {
       return;
     }
 
-    const z = store.map.entities.filter((e) => {
+    const z = mapStore.map.entities.filter((e) => {
       return (
-        e.position.x === store.mouse.position.x &&
-        e.position.y === store.mouse.position.y
+        e.position.x === controlsStore.mouse.position.x &&
+        e.position.y === controlsStore.mouse.position.y
       );
     }).length;
 
-    store.map?.entities.push({
-      id: `${store.editor.toolbar.selectedComponent.name}-${Math.random()
-        .toString(36)
-        .substring(2, 9)}`,
+    mapStore.map?.entities.push({
+      id: `${
+        editorStore.toolbar.components.selectedComponent.name
+      }-${Math.random().toString(36).substring(2, 9)}`,
       position: {
-        x: store.mouse.position.x,
-        y: store.mouse.position.y,
+        x: controlsStore.mouse.position.x,
+        y: controlsStore.mouse.position.y,
         z,
       },
       rotation:
-        store.editor.toolbar.selectedComponentRotation ?? Rotation.NORTH,
+        editorStore.toolbar.components.selectedComponentRotation ??
+        Rotation.NORTH,
       size: {
         x: 1,
         y: 1,
         z: 1,
       },
-      sprite: store.editor.toolbar.selectedComponent,
+      sprite: editorStore.toolbar.components.selectedComponent,
     });
   });
 
   canvas.addEventListener("mousemove", (event) => {
-    const store = getStore();
+    const mapStore = getMapStore();
+    const editorStore = getEditorStore();
+    const controlsStore = getControlsStore();
     const rect = canvas.getBoundingClientRect();
 
     const screenVector = {
@@ -82,27 +89,27 @@ export function registerControls() {
       y: Math.round(gridVector.y),
     };
 
-    store.setMouse(mouse);
+    controlsStore.setMouse(mouse);
 
-    const zEnts = store?.map?.entities?.filter((e) => {
+    const zEnts = mapStore?.map?.entities?.filter((e) => {
       return (
-        e.position.x === store.mouse.position.x &&
-        e.position.y === store.mouse.position.y
+        e.position.x === controlsStore.mouse.position.x &&
+        e.position.y === controlsStore.mouse.position.y
       );
     });
 
-    store.editor.toolbar.hoveredEntities = zEnts ?? [];
+    editorStore.toolbar.select.hoveredEntities = zEnts ?? [];
   });
 
   document.addEventListener("keydown", (event) => {
-    const store = getStore();
+    const controlsStore = getControlsStore();
 
-    store.setKeyboardInput(event.key, true);
+    controlsStore.setKeyboardInput(event.key, true);
   });
 
   document.addEventListener("keyup", (event) => {
-    const store = getStore();
+    const controlsStore = getControlsStore();
 
-    store.setKeyboardInput(event.key, false);
+    controlsStore.setKeyboardInput(event.key, false);
   });
 }

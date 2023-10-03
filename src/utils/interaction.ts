@@ -1,15 +1,13 @@
-import { getStore } from "@/store";
+import { getEditorStore } from "@/stores/editor";
 import { Entity } from "@/types/entity";
 
 export function isHovered(entity: Entity) {
-  const store = getStore();
+  const editorStore = getEditorStore();
+  const hoveredEnts = editorStore.toolbar.select.hoveredEntities;
 
-  if (
-    !store.editor.toolbar.hoveredEntities ||
-    store.editor.toolbar.hoveredEntities.length === 0
-  ) {
+  if (!hoveredEnts || hoveredEnts.length === 0) {
     return false;
   }
 
-  return store.editor.toolbar.hoveredEntities.some((e) => e.id === entity.id);
+  return hoveredEnts.some((e) => e.id === entity.id);
 }

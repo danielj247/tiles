@@ -1,13 +1,14 @@
-import { useStore } from "@/store";
+import { useEditorStore } from "@/stores/editor";
 import SelectTool from "@/ui/components/toolbar/select-tool";
 import ComponentsTool from "@/ui/components/toolbar/components-tool";
 import DeleteTool from "@/ui/components/toolbar/delete-tool";
-import { Tool } from "@/types/editor";
+import { Tool } from "@/types/tool";
 
 export default function Toolbar() {
-  const selectedTool = useStore((state) => state.editor.toolbar.selectedTool);
-  const setSelectedTool = useStore(
-    (state) => state.editor.toolbar.setSelectedTool,
+  const selectedTool = useEditorStore((state) => state.toolbar.selectedTool);
+
+  const setSelectedTool = useEditorStore(
+    (state) => state.toolbar.setSelectedTool,
   );
 
   function toggleSelectedTool(tab: Tool) {

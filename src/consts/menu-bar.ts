@@ -1,4 +1,4 @@
-import { getStore } from "@/store";
+import { getMapStore } from "@/stores/map";
 import { getTilesets } from "@/utils/tilesets";
 import { DialogFormData, FormComponent } from "@/types/dialog-form";
 import { Tileset } from "@/types/tileset";
@@ -60,7 +60,7 @@ export const DIALOG_DATA: DialogFormData = {
     ],
     onSubmit: (event, close) => {
       event.preventDefault();
-      const store = getStore();
+      const mapStore = getMapStore();
       const form = event.target as HTMLFormElement;
       const name = form.elements.namedItem("map-name") as HTMLInputElement;
       const width = form.elements.namedItem("width") as HTMLInputElement;
@@ -75,7 +75,7 @@ export const DIALOG_DATA: DialogFormData = {
         entities: [],
       };
 
-      store.setMap(map);
+      mapStore.setMap(map);
       close();
     },
   },

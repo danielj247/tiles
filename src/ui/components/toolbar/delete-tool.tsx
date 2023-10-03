@@ -1,7 +1,7 @@
 import { TrashIcon } from "lucide-react";
 import { Button } from "@/ui/components/ui/button";
 import { cn } from "@/utils/general";
-import { Tool } from "@/types/editor";
+import { Tool } from "@/types/tool";
 
 interface DeleteTool {
   selected: boolean;

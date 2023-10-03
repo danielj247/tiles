@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { MenubarProps } from "@radix-ui/react-menubar";
-import { useStore } from "@/store";
-import { MapFile } from "@/types/map";
-import { saveMap, loadMap, parseMapFile } from "@/utils/map";
+import { useMapStore } from "@/stores/map";
 import DialogFormRenderer from "@/ui/components/menu-bar/dialog-form-renderer";
 import {
   Menubar,
@@ -21,11 +19,13 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/ui/components/ui/dialog";
+import { saveMap, loadMap, parseMapFile } from "@/utils/map";
+import { MapFile } from "@/types/map";
 import { DIALOG_DATA } from "@/consts/menu-bar";
 
 export default function MenuBar(props: MenubarProps) {
-  const map = useStore((state) => state.map);
-  const setMap = useStore((state) => state.setMap);
+  const map = useMapStore((state) => state.map);
+  const setMap = useMapStore((state) => state.setMap);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState("");
   const dialog = dialogKey ? DIALOG_DATA[dialogKey] : undefined;

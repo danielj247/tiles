@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { BoxIcon } from "lucide-react";
-import { useStore } from "@/store";
-import { cn } from "@/utils/general";
+import { useMapStore } from "@/stores/map";
+import { useEditorStore } from "@/stores/editor";
 import { Button } from "@/ui/components/ui/button";
-import { Tool } from "@/types/editor";
+import { cn } from "@/utils/general";
+import { Tool } from "@/types/tool";
 
 interface ComponentsToolProps {
   selected: boolean;
@@ -12,14 +13,14 @@ interface ComponentsToolProps {
 
 export default function ComponentsTool(props: ComponentsToolProps) {
   const { selected, toggleSelectedTool } = props;
-  const map = useStore((state) => state.map);
+  const map = useMapStore((state) => state.map);
 
-  const selectedComponent = useStore(
-    (state) => state.editor.toolbar.selectedComponent,
+  const selectedComponent = useEditorStore(
+    (state) => state.toolbar.components.selectedComponent,
   );
 
-  const setSelectedComponent = useStore(
-    (state) => state.editor.toolbar.setSelectedComponent,
+  const setSelectedComponent = useEditorStore(
+    (state) => state.toolbar.components.setSelectedComponent,
   );
 
   const components = useMemo(() => {

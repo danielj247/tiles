@@ -1,23 +1,32 @@
 import { Rotate3DIcon } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { useStore } from "@/store";
+import { useMapStore } from "@/stores/map";
+import { useControlsStore } from "@/stores/controls";
+import { useEditorStore } from "@/stores/editor";
 import Toolbar from "@/ui/components/toolbar";
 import MenuBar from "@/ui/components/menu-bar";
 import { Button } from "@/ui/components/ui/button";
 import HomeScreenCard from "@/ui/components/home-screen-card";
 import { Rotation } from "@/types/rotation";
-import { Tool } from "@/types/editor";
+import { Tool } from "@/types/tool";
 
 export default function App() {
-  const selectedMap = useStore((state) => state.map);
-  const mousePos = useStore((state) => state.mouse.position);
-  const hoveredEnts = useStore((state) => state.editor.toolbar.hoveredEntities);
-  const selectedTool = useStore((state) => state.editor.toolbar.selectedTool);
-  const rotation = useStore(
-    (state) => state.editor.toolbar.selectedComponentRotation,
+  const selectedMap = useMapStore((state) => state.map);
+
+  const mousePos = useControlsStore((state) => state.mouse.position);
+
+  const selectedTool = useEditorStore((state) => state.toolbar.selectedTool);
+
+  const hoveredEnts = useEditorStore(
+    (state) => state.toolbar.select.hoveredEntities,
   );
-  const setRotation = useStore(
-    (state) => state.editor.toolbar.setSelectedComponentRotation,
+
+  const rotation = useEditorStore(
+    (state) => state.toolbar.components.selectedComponentRotation,
+  );
+
+  const setRotation = useEditorStore(
+    (state) => state.toolbar.components.setSelectedComponentRotation,
   );
 
   const isSelectTool = selectedTool === Tool.Select;

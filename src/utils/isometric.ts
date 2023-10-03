@@ -1,10 +1,10 @@
 // Isometric helpers
 // https://gist.github.com/jordwest/8a12196436ebcf8df98a2745251915b5
 
-import { getStore } from "@/store";
+import { getCameraStore } from "@/stores/camera";
+import { Tileset } from "@/types/tileset";
 import { Vector2, Vector3 } from "@/types/vector";
 import { SPRITE_HEIGHT, SPRITE_WIDTH } from "@/consts/sprite";
-import { Tileset } from "@/types/tileset";
 
 const FALLBACK_MODIFIERS = {
   i_x: 1,
@@ -42,14 +42,14 @@ function invertMatrix(a: number, b: number, c: number, d: number) {
 }
 
 export function toPixel(grid: Vector3, tileset: Tileset, camera = true) {
-  const store = getStore();
+  const cameraStore = getCameraStore();
   const { i_x, i_y, j_x, j_y } = mods(tileset);
   const width = tileset?.tile?.width || SPRITE_WIDTH;
   const height = tileset?.tile?.height || SPRITE_HEIGHT;
   let offset: Vector2 = { x: 0, y: 0 };
 
   if (camera) {
-    offset = store.camera.position;
+    offset = cameraStore.position;
   }
 
   return {
@@ -63,7 +63,7 @@ export function toPixel(grid: Vector3, tileset: Tileset, camera = true) {
 }
 
 export function toGrid(pixel: Vector3, tileset: Tileset, camera = true) {
-  const store = getStore();
+  const cameraStore = getCameraStore();
   const { i_x, i_y, j_x, j_y } = mods(tileset);
   const width = tileset?.tile?.width || SPRITE_WIDTH;
   const height = tileset?.tile?.height || SPRITE_HEIGHT;
@@ -77,7 +77,7 @@ export function toGrid(pixel: Vector3, tileset: Tileset, camera = true) {
   const inv = invertMatrix(a, b, c, d);
 
   if (camera) {
-    offset = store.camera.position;
+    offset = cameraStore.position;
   }
 
   const p = pixel as Vector3;

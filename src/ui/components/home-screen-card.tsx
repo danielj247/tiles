@@ -5,22 +5,25 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/ui/
 import { Dialog, DialogContent, DialogTrigger } from "@/ui/components/ui/dialog";
 import { loadMap } from "@/utils/map";
 import { DIALOG_DATA } from "@/consts/menu-bar";
+import { useMemo } from "react";
 
 const GREETINGS = ["Hello", "Hi", "Welcome", "Howdy", "Greetings"];
 const NAME = ["friend", "buddy", "pal", "dude"];
 
-export default function HomeScreenCard() {
-  function getGreeting() {
-    const greeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
-    const name = NAME[Math.floor(Math.random() * NAME.length)];
+function getGreeting() {
+  const greeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+  const name = NAME[Math.floor(Math.random() * NAME.length)];
 
-    return `${greeting}, ${name}!`;
-  }
+  return `${greeting}, ${name}!`;
+}
+
+export default function HomeScreenCard() {
+  const greeting = useMemo(() => getGreeting(), []);
 
   return (
     <Card className="w-96">
       <CardHeader>
-        <CardTitle>{getGreeting()}</CardTitle>
+        <CardTitle>{greeting}</CardTitle>
         <CardDescription>
           <p className="mt-2">
             Welcome to <span className="font-semibold">tiles</span>, I hope you enjoy using it!

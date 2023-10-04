@@ -61,7 +61,7 @@ export default function App() {
       </div>
 
       {!selectedMap && (
-        <div className="flex justify-center items-center w-full h-[90vh] absolute top-10 left-0">
+        <div className="flex justify-center items-center w-full absolute top-52 left-0">
           <HomeScreenCard />
         </div>
       )}

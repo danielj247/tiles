@@ -38,12 +38,7 @@ export async function loadMapFile() {
   const file = await handle.getFile();
   const map = JSON.parse(await file.text());
 
-  const hasProperties = !!(
-    map?.name ||
-    map?.width ||
-    map?.height ||
-    map?.tileset
-  );
+  const hasProperties = !!(map?.name || map?.width || map?.height || map?.tileset);
 
   if (!map) {
     console.error("No map file provided");

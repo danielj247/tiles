@@ -30,13 +30,7 @@ export default function Block(props: BlockProps) {
   const x = Math.round(pixels.x);
   const y = Math.round(pixels.y);
 
-  ctx.drawImage(
-    sprite[rotation],
-    x,
-    y,
-    tileset.tile.width * size.x,
-    tileset.tile.height * size.y,
-  );
+  ctx.drawImage(sprite[rotation], x, y, tileset.tile.width * size.x, tileset.tile.height * size.y);
 
   if (opacity) {
     ctx.globalAlpha = gAlpha;

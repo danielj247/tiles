@@ -54,11 +54,7 @@ export function toPixel(grid: Vector3, tileset: Tileset, camera = true) {
 
   return {
     x: grid.x * i_x * 0.5 * width + grid.y * j_x * 0.5 * width + offset.x,
-    y:
-      grid.x * i_y * 0.5 * height +
-      grid.y * j_y * 0.5 * height -
-      grid.z * height * 0.25 +
-      offset.y,
+    y: grid.x * i_y * 0.5 * height + grid.y * j_y * 0.5 * height - grid.z * height * 0.25 + offset.y,
   };
 }
 
@@ -83,16 +79,8 @@ export function toGrid(pixel: Vector3, tileset: Tileset, camera = true) {
   const p = pixel as Vector3;
   if (p.z) {
     return {
-      x:
-        (pixel.x - offset.x) * inv.a +
-        (pixel.y - offset.y) * inv.b -
-        p.z * inv.a -
-        p.z * inv.b,
-      y:
-        (pixel.x - offset.x) * inv.c +
-        (pixel.y - offset.y) * inv.d -
-        p.z * inv.c -
-        p.z * inv.d,
+      x: (pixel.x - offset.x) * inv.a + (pixel.y - offset.y) * inv.b - p.z * inv.a - p.z * inv.b,
+      y: (pixel.x - offset.x) * inv.c + (pixel.y - offset.y) * inv.d - p.z * inv.c - p.z * inv.d,
     };
   }
 

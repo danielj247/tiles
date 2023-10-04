@@ -22,10 +22,7 @@ export function registerControls() {
         ...mapStore.map,
         entities:
           mapStore.map?.entities.filter((e) => {
-            return (
-              e.position.x !== controlsStore.mouse.position.x ||
-              e.position.y !== controlsStore.mouse.position.y
-            );
+            return e.position.x !== controlsStore.mouse.position.x || e.position.y !== controlsStore.mouse.position.y;
           }) || [],
       };
 
@@ -44,24 +41,17 @@ export function registerControls() {
     }
 
     const z = mapStore.map.entities.filter((e) => {
-      return (
-        e.position.x === controlsStore.mouse.position.x &&
-        e.position.y === controlsStore.mouse.position.y
-      );
+      return e.position.x === controlsStore.mouse.position.x && e.position.y === controlsStore.mouse.position.y;
     }).length;
 
     mapStore.map?.entities.push({
-      id: `${
-        editorStore.toolbar.components.selectedComponent.name
-      }-${Math.random().toString(36).substring(2, 9)}`,
+      id: `${editorStore.toolbar.components.selectedComponent.name}-${Math.random().toString(36).substring(2, 9)}`,
       position: {
         x: controlsStore.mouse.position.x,
         y: controlsStore.mouse.position.y,
         z,
       },
-      rotation:
-        editorStore.toolbar.components.selectedComponentRotation ??
-        Rotation.NORTH,
+      rotation: editorStore.toolbar.components.selectedComponentRotation ?? Rotation.NORTH,
       size: {
         x: 1,
         y: 1,
@@ -92,10 +82,7 @@ export function registerControls() {
     controlsStore.setMouse(mouse);
 
     const zEnts = mapStore?.map?.entities?.filter((e) => {
-      return (
-        e.position.x === controlsStore.mouse.position.x &&
-        e.position.y === controlsStore.mouse.position.y
-      );
+      return e.position.x === controlsStore.mouse.position.x && e.position.y === controlsStore.mouse.position.y;
     });
 
     editorStore.toolbar.select.hoveredEntities = zEnts ?? [];

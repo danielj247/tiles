@@ -14,13 +14,9 @@ export default function Tile(props: TileProps) {
   const controlsStore = getControlsStore();
   const { ctx } = getCanvas();
 
-  const hovered =
-    controlsStore.mouse.position.x === position.x &&
-    controlsStore.mouse.position.y === position.y;
+  const hovered = controlsStore.mouse.position.x === position.x && controlsStore.mouse.position.y === position.y;
 
-  ctx.strokeStyle = hovered
-    ? "rgba(255, 255, 255, 0.7)"
-    : "rgba(255, 255, 255, 0.2)";
+  ctx.strokeStyle = hovered ? "rgba(255, 255, 255, 0.7)" : "rgba(255, 255, 255, 0.2)";
 
   const pixels = toPixel(
     {

@@ -92,8 +92,7 @@ function renderGhost() {
   }
 
   const selectedComponent = editorStore?.toolbar.components.selectedComponent;
-  const selectedRotation =
-    editorStore?.toolbar.components.selectedComponentRotation;
+  const selectedRotation = editorStore?.toolbar.components.selectedComponentRotation;
   const tileset = mapStore.map?.tileset;
 
   if (
@@ -106,10 +105,7 @@ function renderGhost() {
   }
 
   const z = mapStore.map.entities.filter((e) => {
-    return (
-      e.position.x === controlsStore.mouse.position.x &&
-      e.position.y === controlsStore.mouse.position.y
-    );
+    return e.position.x === controlsStore.mouse.position.x && e.position.y === controlsStore.mouse.position.y;
   }).length;
 
   Block({

@@ -5,7 +5,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   overrides: [
     {
       env: {
@@ -24,10 +24,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": "error",
-    // indent: ["error", 1],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "double"],
     semi: ["error", "always"],
-    "comma-dangle": ["error", "always-multiline"],
+    quotes: ["error", "double"],
   },
 };

@@ -5,6 +5,11 @@
   "engines": {
     "node": "20.7.0"
   },
+  "author": {
+    "name": "Daniel Jarrett",
+    "email": "me@danieljarrett.dev"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && tsc-alias && vite build",
@@ -24,6 +29,7 @@
     "@vitejs/plugin-react": "^4.1.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "postcss": "^8.4.30",
     "prettier": "3.0.3",

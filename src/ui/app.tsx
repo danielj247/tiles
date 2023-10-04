@@ -17,17 +17,11 @@ export default function App() {
 
   const selectedTool = useEditorStore((state) => state.toolbar.selectedTool);
 
-  const hoveredEnts = useEditorStore(
-    (state) => state.toolbar.select.hoveredEntities,
-  );
+  const hoveredEnts = useEditorStore((state) => state.toolbar.select.hoveredEntities);
 
-  const rotation = useEditorStore(
-    (state) => state.toolbar.components.selectedComponentRotation,
-  );
+  const rotation = useEditorStore((state) => state.toolbar.components.selectedComponentRotation);
 
-  const setRotation = useEditorStore(
-    (state) => state.toolbar.components.setSelectedComponentRotation,
-  );
+  const setRotation = useEditorStore((state) => state.toolbar.components.setSelectedComponentRotation);
 
   const isSelectTool = selectedTool === Tool.Select;
   const isComponentsTool = selectedTool === Tool.Components;
@@ -61,11 +55,7 @@ export default function App() {
                 <GitHubLogoIcon className="ml-2 w-5 h-5" />
               </h1>
             </a>
-            {selectedMap && (
-              <p className="bg-pink-600 py-1 px-2 ml-1 rounded text-white mt-5">
-                {selectedMap.name}
-              </p>
-            )}
+            {selectedMap && <p className="bg-pink-600 py-1 px-2 ml-1 rounded text-white mt-5">{selectedMap.name}</p>}
           </div>
         </header>
       </div>
@@ -101,8 +91,7 @@ export default function App() {
           </p>
           <hr />
           <p>
-            {hoveredEnts?.length || 0}{" "}
-            {hoveredEnts?.length === 1 ? "entity" : "entities"}
+            {hoveredEnts?.length || 0} {hoveredEnts?.length === 1 ? "entity" : "entities"}
           </p>
           {hoveredEnts && hoveredEnts.length > 0 && <hr />}
           {hoveredEnts?.map((ent) => <p key={ent.id}>{ent.id}</p>)}
